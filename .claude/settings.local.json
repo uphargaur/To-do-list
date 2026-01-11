@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Skill(create_plan)",
+      "Bash(npm create:*)",
+      "Bash(node --version:*)",
+      "Bash(npm --version)",
+      "Bash(curl:*)",
+      "Bash(sudo -E bash -)",
+      "Bash(bash)",
+      "Bash(export NVM_DIR=\"$HOME/.nvm\")",
+      "Bash([ -s \"$NVM_DIR/nvm.sh\" ])",
+      "Bash(. \"$NVM_DIR/nvm.sh\")",
+      "Bash(npm install)",
+      "Bash(npm run dev)",
+      "Bash(git init:*)"
+    ]
+  }
+}

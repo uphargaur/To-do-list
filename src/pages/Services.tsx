@@ -1,0 +1,252 @@
+import {
+  Box,
+  Container,
+  Typography,
+  Grid,
+  Card,
+  CardContent,
+  Button,
+  useTheme,
+  alpha,
+  Divider,
+} from '@mui/material';
+import { Link } from 'react-router-dom';
+import PsychologyIcon from '@mui/icons-material/Psychology';
+import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
+import NightlightIcon from '@mui/icons-material/Nightlight';
+import CalculateIcon from '@mui/icons-material/Calculate';
+import HomeIcon from '@mui/icons-material/Home';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import { services, sessionOptions } from '../utils/data';
+
+const iconMap: Record<string, any> = {
+  psychology: PsychologyIcon,
+  auto_awesome: AutoAwesomeIcon,
+  nightlight: NightlightIcon,
+  calculate: CalculateIcon,
+  home: HomeIcon,
+};
+
+const Services = () => {
+  const theme = useTheme();
+
+  return (
+    <Box>
+      {/* Hero Section */}
+      <Box
+        sx={{
+          background: `linear-gradient(135deg, ${alpha(theme.palette.primary.main, 0.1)} 0%, ${alpha(
+            theme.palette.secondary.main,
+            0.1
+          )} 100%)`,
+          pt: { xs: 8, md: 12 },
+          pb: { xs: 6, md: 8 },
+        }}
+      >
+        <Container maxWidth="lg">
+          <Typography
+            variant="h1"
+            sx={{
+              fontSize: { xs: '2.5rem', md: '3.5rem' },
+              mb: 3,
+              fontWeight: 700,
+              textAlign: 'center',
+            }}
+          >
+            Services
+          </Typography>
+          <Typography
+            variant="h5"
+            color="text.secondary"
+            sx={{ mb: 4, textAlign: 'center', maxWidth: 800, mx: 'auto' }}
+          >
+            Comprehensive guidance combining modern psychology with ancient wisdom
+          </Typography>
+        </Container>
+      </Box>
+
+      {/* Services Detail Section */}
+      <Container maxWidth="lg" sx={{ py: 10 }}>
+        <Grid container spacing={8}>
+          {services.map((service, index) => {
+            const IconComponent = iconMap[service.icon];
+            return (
+              <Grid item xs={12} key={service.id}>
+                <Card
+                  sx={{
+                    p: { xs: 3, md: 5 },
+                    background:
+                      index % 2 === 0
+                        ? alpha(theme.palette.primary.main, 0.03)
+                        : alpha(theme.palette.secondary.main, 0.03),
+                  }}
+                >
+                  <Grid container spacing={4} alignItems="center">
+                    <Grid item xs={12} md={3} sx={{ textAlign: { xs: 'center', md: 'left' } }}>
+                      <Box
+                        sx={{
+                          width: 100,
+                          height: 100,
+                          borderRadius: 3,
+                          background: `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          mx: { xs: 'auto', md: 0 },
+                          mb: { xs: 2, md: 0 },
+                        }}
+                      >
+                        <IconComponent sx={{ fontSize: 48, color: 'white' }} />
+                      </Box>
+                    </Grid>
+                    <Grid item xs={12} md={9}>
+                      <Typography variant="h3" sx={{ mb: 2, fontWeight: 600 }}>
+                        {service.name}
+                      </Typography>
+                      <Typography
+                        variant="h6"
+                        color="text.secondary"
+                        sx={{ mb: 3, fontWeight: 400 }}
+                      >
+                        {service.description}
+                      </Typography>
+                      <Typography
+                        variant="body1"
+                        color="text.secondary"
+                        sx={{ whiteSpace: 'pre-line', lineHeight: 1.8 }}
+                      >
+                        {service.detailedDescription}
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                </Card>
+              </Grid>
+            );
+          })}
+        </Grid>
+      </Container>
+
+      {/* Pricing Section */}
+      <Box sx={{ bgcolor: alpha(theme.palette.primary.main, 0.05), py: 10 }}>
+        <Container maxWidth="lg">
+          <Typography variant="h2" sx={{ mb: 2, fontWeight: 700, textAlign: 'center' }}>
+            Session Pricing
+          </Typography>
+          <Typography
+            variant="h6"
+            color="text.secondary"
+            sx={{ mb: 6, textAlign: 'center', maxWidth: 700, mx: 'auto' }}
+          >
+            Choose the session duration that works best for you
+          </Typography>
+
+          <Grid container spacing={4} justifyContent="center">
+            {sessionOptions.map((option, index) => (
+              <Grid item xs={12} sm={6} md={4} key={index}>
+                <Card
+                  sx={{
+                    textAlign: 'center',
+                    p: 4,
+                    height: '100%',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    transition: 'all 0.3s ease',
+                    border:
+                      option.duration === 60
+                        ? `2px solid ${theme.palette.primary.main}`
+                        : '1px solid transparent',
+                    '&:hover': {
+                      transform: 'translateY(-8px)',
+                      boxShadow: `0 12px 40px ${alpha(theme.palette.primary.main, 0.2)}`,
+                    },
+                  }}
+                >
+                  <CardContent sx={{ flexGrow: 1 }}>
+                    {option.duration === 60 && (
+                      <Typography
+                        variant="caption"
+                        sx={{
+                          bgcolor: theme.palette.primary.main,
+                          color: 'white',
+                          px: 2,
+                          py: 0.5,
+                          borderRadius: 1,
+                          mb: 2,
+                          display: 'inline-block',
+                        }}
+                      >
+                        POPULAR
+                      </Typography>
+                    )}
+                    <Typography variant="h4" sx={{ mb: 1, fontWeight: 600 }}>
+                      {option.duration} Minutes
+                    </Typography>
+                    <Divider sx={{ my: 2 }} />
+                    <Typography variant="h2" sx={{ mb: 1, fontWeight: 700, color: 'primary.main' }}>
+                      ₹{option.price}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
+                      per session
+                    </Typography>
+                    <Button
+                      component={Link}
+                      to="/book"
+                      variant={option.duration === 60 ? 'contained' : 'outlined'}
+                      fullWidth
+                      size="large"
+                    >
+                      Book Now
+                    </Button>
+                  </CardContent>
+                </Card>
+              </Grid>
+            ))}
+          </Grid>
+
+          <Box sx={{ textAlign: 'center', mt: 6 }}>
+            <Typography variant="body1" color="text.secondary">
+              All sessions include personalized guidance and follow-up support
+            </Typography>
+          </Box>
+        </Container>
+      </Box>
+
+      {/* CTA Section */}
+      <Container maxWidth="md" sx={{ py: 10 }}>
+        <Card
+          sx={{
+            background: `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
+            color: 'white',
+            p: 6,
+            textAlign: 'center',
+          }}
+        >
+          <Typography variant="h3" sx={{ mb: 2, fontWeight: 700 }}>
+            Ready to Start Your Journey?
+          </Typography>
+          <Typography variant="h6" sx={{ mb: 4, opacity: 0.95 }}>
+            Book your session now and take the first step towards transformation
+          </Typography>
+          <Button
+            component={Link}
+            to="/book"
+            variant="contained"
+            size="large"
+            endIcon={<ArrowForwardIcon />}
+            sx={{
+              bgcolor: 'white',
+              color: theme.palette.primary.main,
+              '&:hover': {
+                bgcolor: alpha('#ffffff', 0.9),
+              },
+            }}
+          >
+            Book a Session
+          </Button>
+        </Card>
+      </Container>
+    </Box>
+  );
+};
+
+export default Services;
