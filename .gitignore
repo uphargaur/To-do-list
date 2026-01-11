@@ -31,3 +31,4 @@ dist-ssr
 # Supabase
 .supabase
 code.py
+.claude/settings.local.json
