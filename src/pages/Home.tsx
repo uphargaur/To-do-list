@@ -131,11 +131,11 @@ const Home = () => {
         sx={{
           position: 'relative',
           overflow: 'hidden',
-          background: `radial-gradient(ellipse at top, ${alpha(theme.palette.secondary.main, 0.15)} 0%, ${alpha(
-            theme.palette.primary.main,
-            0.08
+          background: `radial-gradient(ellipse at top, ${alpha(theme.palette.primary.main, 0.25)} 0%, ${alpha(
+            theme.palette.secondary.main,
+            0.15
           )} 50%, transparent 100%),
-          linear-gradient(180deg, #FFFBF5 0%, ${alpha('#E5DDD5', 0.3)} 100%)`,
+          linear-gradient(180deg, #FFF8E7 0%, ${alpha('#FFE5B4', 0.4)} 100%)`,
           pt: { xs: 8, md: 12 },
           pb: { xs: 8, md: 12 },
           '&::before': {

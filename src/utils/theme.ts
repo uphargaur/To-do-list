@@ -1,40 +1,40 @@
 import { createTheme } from '@mui/material/styles';
 
-// Calming cosmic color palette inspired by modern astrology aesthetics
+// Vibrant auspicious color palette inspired by AstroTalk aesthetics
 export const theme = createTheme({
   palette: {
     mode: 'light',
     primary: {
-      main: '#4A5A8D', // Soft cosmic blue-purple
-      light: '#7B8BC4',
-      dark: '#2D3A5F',
-      contrastText: '#FFFFFF',
+      main: '#FFD700', // Lemon yellow / Golden yellow (auspicious)
+      light: '#FFE44D',
+      dark: '#E6C200',
+      contrastText: '#1A1A1A',
     },
     secondary: {
-      main: '#E5C158', // Warm golden
-      light: '#F4D78F',
-      dark: '#C9A43D',
-      contrastText: '#1A202C',
+      main: '#FF6B35', // Vibrant saffron orange
+      light: '#FF8A65',
+      dark: '#E64A19',
+      contrastText: '#FFFFFF',
     },
     background: {
-      default: '#FFFBF5', // Warm cream
+      default: '#FFF8E7', // Warm cream with yellow tint
       paper: '#FFFFFF',
     },
     text: {
-      primary: '#2D3748',
-      secondary: '#5A6A85',
+      primary: '#1A1A1A',
+      secondary: '#4A4A4A',
     },
     success: {
-      main: '#7FB685',
+      main: '#4CAF50',
     },
     error: {
-      main: '#E57373',
+      main: '#D32F2F',
     },
     warning: {
-      main: '#F4A261',
+      main: '#FF9800',
     },
     info: {
-      main: '#7B8BC4',
+      main: '#2196F3',
     },
   },
   typography: {
@@ -102,10 +102,12 @@ export const theme = createTheme({
           },
         },
         contained: {
-          background: 'linear-gradient(135deg, #4A5A8D 0%, #7B8BC4 100%)',
+          background: 'linear-gradient(135deg, #FFD700 0%, #FFA500 100%)',
+          color: '#1A1A1A',
+          fontWeight: 700,
           '&:hover': {
-            background: 'linear-gradient(135deg, #2D3A5F 0%, #4A5A8D 100%)',
-            boxShadow: '0 8px 24px rgba(74, 90, 141, 0.35)',
+            background: 'linear-gradient(135deg, #FFA500 0%, #FF8C00 100%)',
+            boxShadow: '0 8px 24px rgba(255, 140, 0, 0.4)',
           },
         },
         outlined: {
@@ -121,13 +123,13 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           borderRadius: 20,
-          boxShadow: '0 4px 20px rgba(0, 0, 0, 0.06)',
-          border: '1px solid rgba(74, 90, 141, 0.08)',
+          boxShadow: '0 4px 20px rgba(255, 140, 0, 0.15)',
+          border: '2px solid rgba(255, 215, 0, 0.3)',
           transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
           '&:hover': {
             transform: 'translateY(-6px)',
-            boxShadow: '0 12px 40px rgba(74, 90, 141, 0.15)',
-            borderColor: 'rgba(74, 90, 141, 0.2)',
+            boxShadow: '0 12px 40px rgba(255, 140, 0, 0.3)',
+            borderColor: 'rgba(255, 215, 0, 0.6)',
           },
         },
       },
@@ -135,9 +137,10 @@ export const theme = createTheme({
     MuiAppBar: {
       styleOverrides: {
         root: {
-          boxShadow: '0 2px 20px rgba(74, 90, 141, 0.08)',
-          backgroundColor: 'rgba(255, 251, 245, 0.95)',
+          boxShadow: '0 2px 20px rgba(255, 215, 0, 0.2)',
+          backgroundColor: 'rgba(255, 248, 231, 0.98)',
           backdropFilter: 'blur(20px)',
+          borderBottom: '2px solid rgba(255, 215, 0, 0.2)',
         },
       },
     },
@@ -149,12 +152,13 @@ export const theme = createTheme({
             transition: 'all 0.3s ease',
             '&:hover': {
               '& .MuiOutlinedInput-notchedOutline': {
-                borderColor: '#7B8BC4',
+                borderColor: '#FFD700',
               },
             },
             '&.Mui-focused': {
               '& .MuiOutlinedInput-notchedOutline': {
                 borderWidth: '2px',
+                borderColor: '#FFA500',
               },
             },
           },

@@ -12,8 +12,8 @@ const Footer = () => {
       component="footer"
       sx={{
         position: 'relative',
-        background: `linear-gradient(135deg, #2D3A5F 0%, #4A5A8D 100%)`,
-        color: 'white',
+        background: `linear-gradient(135deg, #FF8C00 0%, #FFD700 50%, #FF6B35 100%)`,
+        color: '#1A1A1A',
         py: 6,
         mt: 'auto',
         overflow: 'hidden',
@@ -24,7 +24,17 @@ const Footer = () => {
           right: '-10%',
           width: '500px',
           height: '500px',
-          background: 'radial-gradient(circle, rgba(229, 193, 88, 0.1) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 70%)',
+          borderRadius: '50%',
+        },
+        '&::after': {
+          content: '""',
+          position: 'absolute',
+          bottom: '-30%',
+          left: '-5%',
+          width: '400px',
+          height: '400px',
+          background: 'radial-gradient(circle, rgba(255, 107, 53, 0.15) 0%, transparent 70%)',
           borderRadius: '50%',
         },
       }}
@@ -102,8 +112,8 @@ const Footer = () => {
           </Grid>
         </Grid>
 
-        <Box sx={{ mt: 4, pt: 3, borderTop: '1px solid rgba(255, 255, 255, 0.2)' }}>
-          <Typography variant="body2" align="center" sx={{ opacity: 0.8 }}>
+        <Box sx={{ mt: 4, pt: 3, borderTop: '2px solid rgba(26, 26, 26, 0.15)' }}>
+          <Typography variant="body2" align="center" sx={{ opacity: 0.9, fontWeight: 600 }}>
             © {new Date().getFullYear()} Shirajani. All rights reserved.
           </Typography>
         </Box>
