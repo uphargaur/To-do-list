@@ -2,6 +2,7 @@ import { Box, Container, Typography, Link as MuiLink, Grid, IconButton } from '@
 import { Link } from 'react-router-dom';
 import EmailIcon from '@mui/icons-material/Email';
 import PhoneIcon from '@mui/icons-material/Phone';
+import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
@@ -88,8 +89,17 @@ const Footer = () => {
                 </MuiLink>
               </Box>
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                <PhoneIcon fontSize="small" />
-                <Typography variant="body2">+91 82187 01093</Typography>
+                <WhatsAppIcon fontSize="small" />
+                <MuiLink
+                  href="https://wa.me/918218701093"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  color="inherit"
+                  underline="hover"
+                  sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}
+                >
+                  +91 82187 01093
+                </MuiLink>
               </Box>
             </Box>
 
@@ -98,13 +108,37 @@ const Footer = () => {
                 Follow Me
               </Typography>
               <Box sx={{ display: 'flex', gap: 1 }}>
-                <IconButton color="inherit" size="small" aria-label="Instagram">
+                <IconButton
+                  color="inherit"
+                  size="small"
+                  aria-label="Instagram"
+                  component="a"
+                  href="https://www.instagram.com/moonshinetarot_15?igsh=MWM0cnkwcnBsNDg3Mg%3D%3D&utm_source=qr"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <InstagramIcon />
                 </IconButton>
-                <IconButton color="inherit" size="small" aria-label="Facebook">
+                <IconButton
+                  color="inherit"
+                  size="small"
+                  aria-label="Facebook"
+                  component="a"
+                  href="https://www.facebook.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <FacebookIcon />
                 </IconButton>
-                <IconButton color="inherit" size="small" aria-label="LinkedIn">
+                <IconButton
+                  color="inherit"
+                  size="small"
+                  aria-label="LinkedIn"
+                  component="a"
+                  href="https://www.linkedin.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <LinkedInIcon />
                 </IconButton>
               </Box>
