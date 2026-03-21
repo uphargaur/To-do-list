@@ -83,8 +83,8 @@ const Footer = () => {
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5 }}>
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                 <EmailIcon fontSize="small" />
-                <MuiLink href="mailto:Shirnjani33@gmail.com" color="inherit" underline="hover">
-                  Shirnjani33@gmail.com
+                <MuiLink href="mailto:Shirnjani659@gmail.com" color="inherit" underline="hover">
+                  Shirnjani659@gmail.com
                 </MuiLink>
               </Box>
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>

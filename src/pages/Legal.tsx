@@ -98,7 +98,7 @@ const Legal = () => {
               </Typography>
               <Typography variant="body1">
                 You have the right to access, update, or delete your personal information. Contact
-                us at Shirnjani33@gmail.com for any privacy-related requests.
+                us at Shirnjani659@gmail.com for any privacy-related requests.
               </Typography>
             </Box>
           </AccordionDetails>
@@ -242,7 +242,7 @@ const Legal = () => {
               For any questions or concerns regarding these policies, please contact:
             </Typography>
             <Typography variant="body1" sx={{ mt: 2 }}>
-              <strong>Email:</strong> Shirnjani33@gmail.com
+              <strong>Email:</strong> Shirnjani659@gmail.com
             </Typography>
             <Typography variant="body1">
               <strong>Name:</strong> Shirajani

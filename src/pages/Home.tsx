@@ -43,7 +43,7 @@ const Home = () => {
         left,
         width: size,
         height: size,
-        opacity: 0.15,
+        opacity: 0.06,
         animation: `float ${8 + delay}s ease-in-out infinite`,
         animationDelay: `${delay}s`,
       }}
@@ -73,7 +73,7 @@ const Home = () => {
         right,
         width: size,
         height: size,
-        opacity: 0.12,
+        opacity: 0.05,
         animation: `rotateGlow ${15 + delay}s linear infinite`,
         animationDelay: `${delay}s`,
       }}
@@ -97,7 +97,7 @@ const Home = () => {
         left,
         width: size,
         height: size,
-        opacity: 0.1,
+        opacity: 0.04,
         animation: `gentlePulse ${10 + delay}s ease-in-out infinite`,
         animationDelay: `${delay}s`,
       }}
@@ -131,11 +131,11 @@ const Home = () => {
         sx={{
           position: 'relative',
           overflow: 'hidden',
-          background: `radial-gradient(ellipse at top, ${alpha(theme.palette.primary.main, 0.25)} 0%, ${alpha(
+          background: `radial-gradient(ellipse at top, ${alpha(theme.palette.primary.main, 0.08)} 0%, ${alpha(
             theme.palette.secondary.main,
-            0.15
+            0.05
           )} 50%, transparent 100%),
-          linear-gradient(180deg, #FFF8E7 0%, ${alpha('#FFE5B4', 0.4)} 100%)`,
+          linear-gradient(180deg, #FFFFFF 0%, ${alpha('#FFF8E7', 0.5)} 100%)`,
           pt: { xs: 8, md: 12 },
           pb: { xs: 8, md: 12 },
           '&::before': {
@@ -145,7 +145,7 @@ const Home = () => {
             right: '-10%',
             width: '600px',
             height: '600px',
-            background: `radial-gradient(circle, ${alpha(theme.palette.secondary.main, 0.2)} 0%, transparent 70%)`,
+            background: `radial-gradient(circle, ${alpha(theme.palette.secondary.main, 0.08)} 0%, transparent 70%)`,
             borderRadius: '50%',
             animation: 'gentlePulse 8s ease-in-out infinite',
             pointerEvents: 'none',
@@ -157,7 +157,7 @@ const Home = () => {
             left: '-5%',
             width: '400px',
             height: '400px',
-            background: `radial-gradient(circle, ${alpha(theme.palette.primary.main, 0.15)} 0%, transparent 70%)`,
+            background: `radial-gradient(circle, ${alpha(theme.palette.primary.main, 0.06)} 0%, transparent 70%)`,
             borderRadius: '50%',
             animation: 'gentlePulse 10s ease-in-out infinite',
             animationDelay: '2s',
@@ -179,7 +179,7 @@ const Home = () => {
             position: 'absolute',
             top: '40%',
             right: '15%',
-            opacity: 0.08,
+            opacity: 0.04,
             animation: 'float 12s ease-in-out infinite',
           }}
         >
@@ -191,7 +191,7 @@ const Home = () => {
             position: 'absolute',
             bottom: '15%',
             left: '5%',
-            opacity: 0.08,
+            opacity: 0.04,
             animation: 'float 10s ease-in-out infinite',
             animationDelay: '1s',
           }}
@@ -254,11 +254,11 @@ const Home = () => {
                 <Box
                   sx={{
                     position: 'absolute',
-                    width: '450px',
-                    height: '450px',
-                    background: `radial-gradient(circle, ${alpha(theme.palette.secondary.main, 0.3)} 0%, ${alpha(
+                    width: { xs: '280px', md: '350px' },
+                    height: { xs: '280px', md: '350px' },
+                    background: `radial-gradient(circle, ${alpha(theme.palette.secondary.main, 0.15)} 0%, ${alpha(
                       theme.palette.primary.main,
-                      0.2
+                      0.1
                     )} 50%, transparent 70%)`,
                     borderRadius: '50%',
                     animation: 'rotateGlow 20s linear infinite',
@@ -272,9 +272,9 @@ const Home = () => {
                   sx={{
                     position: 'relative',
                     width: '100%',
-                    maxWidth: 400,
+                    maxWidth: { xs: 280, md: 320 },
                     borderRadius: 4,
-                    boxShadow: `0 20px 60px ${alpha(theme.palette.primary.main, 0.25)}`,
+                    boxShadow: `0 20px 60px ${alpha(theme.palette.primary.main, 0.15)}`,
                     transition: 'transform 0.5s ease',
                     '&:hover': {
                       transform: 'scale(1.02)',
