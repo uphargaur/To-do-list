@@ -1,14 +1,17 @@
+export interface SessionOption {
+  label: string;
+  duration?: number; // in minutes (optional for non-time-based options)
+  price: number; // in rupees
+  description?: string; // optional description
+}
+
 export interface Service {
   id: string;
   name: string;
   description: string;
   detailedDescription: string;
   icon: string;
-}
-
-export interface SessionOption {
-  duration: number; // in minutes
-  price: number; // in rupees
+  pricingOptions: SessionOption[]; // Each service has its own pricing
 }
 
 export interface Testimonial {

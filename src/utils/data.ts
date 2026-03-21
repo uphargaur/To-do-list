@@ -14,6 +14,9 @@ My counseling sessions focus on:
 • Breaking free from limiting beliefs
 • Creating actionable steps for positive change`,
     icon: 'psychology',
+    pricingOptions: [
+      { label: '1 Hour Session', duration: 60, price: 3100 },
+    ],
   },
   {
     id: 'tarot',
@@ -28,6 +31,9 @@ What to expect:
 • Guidance on decision-making and life choices
 • Empowerment to take conscious action`,
     icon: 'auto_awesome',
+    pricingOptions: [
+      { label: '30 Minutes Reading', duration: 30, price: 2100 },
+    ],
   },
   {
     id: 'astrology',
@@ -43,6 +49,10 @@ Consultation includes:
 • Remedial measures for planetary influences
 • Life purpose and soul mission insights`,
     icon: 'nightlight',
+    pricingOptions: [
+      { label: 'Basic Consultation', duration: 60, price: 3100 },
+      { label: 'Detailed Consultation', duration: 90, price: 5100 },
+    ],
   },
   {
     id: 'numerology',
@@ -58,6 +68,9 @@ Analysis covers:
 • Lucky numbers and favorable dates
 • Career and relationship compatibility through numbers`,
     icon: 'calculate',
+    pricingOptions: [
+      { label: 'Numerology + Tarot + Astrology (1 Hour)', duration: 60, price: 5100 },
+    ],
   },
   {
     id: 'vastu',
@@ -73,14 +86,32 @@ Consultation includes:
 • Color schemes and element balance
 • Remedies for Vastu doshas (defects)`,
     icon: 'home',
+    pricingOptions: [
+      { label: 'Vastu Consultation', duration: 60, price: 4100 },
+    ],
+  },
+  {
+    id: 'relationship-healing',
+    name: 'Relationship Healing',
+    description: 'Deep healing work for relationship issues and emotional wounds.',
+    detailedDescription: `Specialized healing sessions focused on resolving relationship patterns, healing past wounds, and creating healthier connections. This intensive program combines counseling, energy work, and guided practices.
+
+Healing includes:
+• Identifying relationship patterns and blocks
+• Healing past relationship trauma
+• Communication skills development
+• Self-love and boundary setting
+• Attracting healthy relationships
+• Ongoing support and guidance`,
+    icon: 'auto_awesome',
+    pricingOptions: [
+      { label: '1 Week Program', description: 'Daily support', price: 7000 },
+      { label: '1 Month Program', description: 'Comprehensive healing', price: 15000 },
+    ],
   },
 ];
 
-export const sessionOptions: SessionOption[] = [
-  { duration: 30, price: 500 },
-  { duration: 60, price: 900 },
-  { duration: 90, price: 1300 },
-];
+// Session options are now service-specific (see services.pricingOptions)
 
 export const testimonials: Testimonial[] = [
   {

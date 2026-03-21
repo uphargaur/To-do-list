@@ -21,7 +21,7 @@ import {
   Alert,
   CircularProgress,
 } from '@mui/material';
-import { services, sessionOptions } from '../utils/data';
+import { services } from '../utils/data';
 import { createBooking, uploadPaymentScreenshot } from '../utils/supabase';
 import paymentQR from '../assets/qr/payment-qr.jpg';
 
@@ -31,7 +31,7 @@ const Book = () => {
   const theme = useTheme();
   const [activeStep, setActiveStep] = useState(0);
   const [selectedService, setSelectedService] = useState('');
-  const [sessionDuration, setSessionDuration] = useState<number>(60);
+  const [selectedPricingIndex, setSelectedPricingIndex] = useState<number>(0);
   const [clientName, setClientName] = useState('');
   const [clientEmail, setClientEmail] = useState('');
   const [clientPhone, setClientPhone] = useState('');
@@ -40,7 +40,8 @@ const Book = () => {
   const [error, setError] = useState('');
   const [bookingId, setBookingId] = useState<string | null>(null);
 
-  const selectedSessionOption = sessionOptions.find((opt) => opt.duration === sessionDuration);
+  const currentService = services.find((s) => s.id === selectedService);
+  const selectedPricingOption = currentService?.pricingOptions[selectedPricingIndex];
 
   const handleNext = async () => {
     setError('');
@@ -51,8 +52,8 @@ const Book = () => {
       return;
     }
 
-    if (activeStep === 1 && !sessionDuration) {
-      setError('Please select a session duration');
+    if (activeStep === 1 && selectedPricingIndex === undefined) {
+      setError('Please select a pricing option');
       return;
     }
 
@@ -77,9 +78,9 @@ const Book = () => {
           clientName,
           clientEmail,
           clientPhone,
-          service: selectedService,
-          sessionDuration,
-          sessionPrice: selectedSessionOption?.price || 0,
+          service: `${currentService?.name} - ${selectedPricingOption?.label}`,
+          sessionDuration: selectedPricingOption?.duration || 0,
+          sessionPrice: selectedPricingOption?.price || 0,
           paymentScreenshot: null,
           paymentVerified: false,
           bookingDate: null,
@@ -169,7 +170,10 @@ const Book = () => {
                       },
                       transition: 'all 0.3s ease',
                     }}
-                    onClick={() => setSelectedService(service.id)}
+                    onClick={() => {
+                      setSelectedService(service.id);
+                      setSelectedPricingIndex(0); // Reset to first pricing option
+                    }}
                   >
                     <CardContent>
                       <Typography variant="h6" sx={{ mb: 1, fontWeight: 600 }}>
@@ -190,25 +194,58 @@ const Book = () => {
         return (
           <Box>
             <Typography variant="h5" sx={{ mb: 3, fontWeight: 600 }}>
-              Choose Session Duration
+              Choose Your Package
             </Typography>
-            <FormControl component="fieldset">
-              <FormLabel component="legend">Session Duration & Price</FormLabel>
-              <RadioGroup
-                value={sessionDuration}
-                onChange={(e) => setSessionDuration(Number(e.target.value))}
-              >
-                {sessionOptions.map((option) => (
-                  <FormControlLabel
-                    key={option.duration}
-                    value={option.duration}
-                    control={<Radio />}
-                    label={`${option.duration} minutes - ₹${option.price}`}
-                    sx={{ mb: 2 }}
-                  />
-                ))}
-              </RadioGroup>
-            </FormControl>
+            {currentService && (
+              <>
+                <Typography variant="h6" sx={{ mb: 2, color: 'primary.main' }}>
+                  {currentService.name}
+                </Typography>
+                <FormControl component="fieldset" fullWidth>
+                  <FormLabel component="legend">Available Packages</FormLabel>
+                  <RadioGroup
+                    value={selectedPricingIndex}
+                    onChange={(e) => setSelectedPricingIndex(Number(e.target.value))}
+                  >
+                    {currentService.pricingOptions.map((option, index) => (
+                      <FormControlLabel
+                        key={index}
+                        value={index}
+                        control={<Radio />}
+                        label={
+                          <Box sx={{ py: 1 }}>
+                            <Typography variant="body1" sx={{ fontWeight: 600 }}>
+                              {option.label}
+                              {option.duration && ` (${option.duration} minutes)`}
+                            </Typography>
+                            {option.description && (
+                              <Typography variant="body2" color="text.secondary">
+                                {option.description}
+                              </Typography>
+                            )}
+                            <Typography variant="h6" sx={{ color: 'primary.main', mt: 0.5 }}>
+                              ₹{option.price.toLocaleString('en-IN')}
+                            </Typography>
+                          </Box>
+                        }
+                        sx={{
+                          mb: 2,
+                          border: '2px solid',
+                          borderColor: selectedPricingIndex === index ? 'primary.main' : 'divider',
+                          borderRadius: 2,
+                          p: 2,
+                          transition: 'all 0.3s ease',
+                          '&:hover': {
+                            borderColor: 'primary.light',
+                            backgroundColor: alpha(theme.palette.primary.main, 0.05),
+                          }
+                        }}
+                      />
+                    ))}
+                  </RadioGroup>
+                </FormControl>
+              </>
+            )}
           </Box>
         );
 
@@ -263,13 +300,23 @@ const Book = () => {
                 Payment Summary
               </Typography>
               <Typography variant="body1">
-                Service: <strong>{services.find((s) => s.id === selectedService)?.name}</strong>
+                Service: <strong>{currentService?.name}</strong>
               </Typography>
               <Typography variant="body1">
-                Duration: <strong>{sessionDuration} minutes</strong>
+                Package: <strong>{selectedPricingOption?.label}</strong>
               </Typography>
-              <Typography variant="h5" sx={{ mt: 2, color: 'primary.main' }}>
-                Total: ₹{selectedSessionOption?.price}
+              {selectedPricingOption?.duration && (
+                <Typography variant="body1">
+                  Duration: <strong>{selectedPricingOption.duration} minutes</strong>
+                </Typography>
+              )}
+              {selectedPricingOption?.description && (
+                <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
+                  {selectedPricingOption.description}
+                </Typography>
+              )}
+              <Typography variant="h5" sx={{ mt: 2, color: 'primary.main', fontWeight: 700 }}>
+                Total: ₹{selectedPricingOption?.price.toLocaleString('en-IN')}
               </Typography>
             </Card>
 
