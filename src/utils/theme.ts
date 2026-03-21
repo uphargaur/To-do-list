@@ -1,40 +1,40 @@
 import { createTheme } from '@mui/material/styles';
 
-// Spiritual and mystical color palette
+// Calming cosmic color palette inspired by modern astrology aesthetics
 export const theme = createTheme({
   palette: {
     mode: 'light',
     primary: {
-      main: '#6B46C1', // Deep Purple
-      light: '#9F7AEA',
-      dark: '#553C9A',
+      main: '#4A5A8D', // Soft cosmic blue-purple
+      light: '#7B8BC4',
+      dark: '#2D3A5F',
       contrastText: '#FFFFFF',
     },
     secondary: {
-      main: '#D4AF37', // Gold
-      light: '#E5C158',
-      dark: '#B8941F',
+      main: '#E5C158', // Warm golden
+      light: '#F4D78F',
+      dark: '#C9A43D',
       contrastText: '#1A202C',
     },
     background: {
-      default: '#F7FAFC',
+      default: '#FFFBF5', // Warm cream
       paper: '#FFFFFF',
     },
     text: {
-      primary: '#1A202C',
-      secondary: '#4A5568',
+      primary: '#2D3748',
+      secondary: '#5A6A85',
     },
     success: {
-      main: '#38A169',
+      main: '#7FB685',
     },
     error: {
-      main: '#E53E3E',
+      main: '#E57373',
     },
     warning: {
-      main: '#DD6B20',
+      main: '#F4A261',
     },
     info: {
-      main: '#3182CE',
+      main: '#7B8BC4',
     },
   },
   typography: {
@@ -91,17 +91,28 @@ export const theme = createTheme({
     MuiButton: {
       styleOverrides: {
         root: {
-          borderRadius: 12,
-          padding: '12px 32px',
+          borderRadius: 24,
+          padding: '14px 36px',
           fontSize: '1rem',
           boxShadow: 'none',
+          transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
           '&:hover': {
-            boxShadow: '0 4px 12px rgba(107, 70, 193, 0.3)',
+            boxShadow: '0 8px 24px rgba(74, 90, 141, 0.25)',
+            transform: 'translateY(-2px)',
           },
         },
         contained: {
+          background: 'linear-gradient(135deg, #4A5A8D 0%, #7B8BC4 100%)',
           '&:hover': {
-            boxShadow: '0 4px 12px rgba(107, 70, 193, 0.3)',
+            background: 'linear-gradient(135deg, #2D3A5F 0%, #4A5A8D 100%)',
+            boxShadow: '0 8px 24px rgba(74, 90, 141, 0.35)',
+          },
+        },
+        outlined: {
+          borderWidth: '2px',
+          '&:hover': {
+            borderWidth: '2px',
+            backgroundColor: 'rgba(74, 90, 141, 0.04)',
           },
         },
       },
@@ -109,12 +120,14 @@ export const theme = createTheme({
     MuiCard: {
       styleOverrides: {
         root: {
-          borderRadius: 16,
-          boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)',
-          transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+          borderRadius: 20,
+          boxShadow: '0 4px 20px rgba(0, 0, 0, 0.06)',
+          border: '1px solid rgba(74, 90, 141, 0.08)',
+          transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
           '&:hover': {
-            transform: 'translateY(-4px)',
-            boxShadow: '0 8px 30px rgba(0, 0, 0, 0.12)',
+            transform: 'translateY(-6px)',
+            boxShadow: '0 12px 40px rgba(74, 90, 141, 0.15)',
+            borderColor: 'rgba(74, 90, 141, 0.2)',
           },
         },
       },
@@ -122,9 +135,9 @@ export const theme = createTheme({
     MuiAppBar: {
       styleOverrides: {
         root: {
-          boxShadow: '0 2px 10px rgba(0, 0, 0, 0.05)',
-          backgroundColor: 'rgba(255, 255, 255, 0.95)',
-          backdropFilter: 'blur(10px)',
+          boxShadow: '0 2px 20px rgba(74, 90, 141, 0.08)',
+          backgroundColor: 'rgba(255, 251, 245, 0.95)',
+          backdropFilter: 'blur(20px)',
         },
       },
     },
@@ -132,7 +145,18 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           '& .MuiOutlinedInput-root': {
-            borderRadius: 12,
+            borderRadius: 16,
+            transition: 'all 0.3s ease',
+            '&:hover': {
+              '& .MuiOutlinedInput-notchedOutline': {
+                borderColor: '#7B8BC4',
+              },
+            },
+            '&.Mui-focused': {
+              '& .MuiOutlinedInput-notchedOutline': {
+                borderWidth: '2px',
+              },
+            },
           },
         },
       },

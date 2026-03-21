@@ -84,7 +84,7 @@ const Navbar = () => {
                 fontSize: { xs: '1.25rem', md: '1.5rem' },
               }}
             >
-              Shirnjani
+              Shirajani
             </Typography>
 
             {isMobile ? (
@@ -107,6 +107,9 @@ const Navbar = () => {
                       to={item.path}
                       variant="contained"
                       color="primary"
+                      sx={{
+                        px: 3,
+                      }}
                     >
                       {item.label}
                     </Button>
@@ -120,7 +123,22 @@ const Navbar = () => {
                           location.pathname === item.path
                             ? theme.palette.primary.main
                             : theme.palette.text.primary,
-                        fontWeight: location.pathname === item.path ? 600 : 400,
+                        fontWeight: location.pathname === item.path ? 600 : 500,
+                        position: 'relative',
+                        '&::after': {
+                          content: '""',
+                          position: 'absolute',
+                          bottom: 8,
+                          left: '50%',
+                          transform: 'translateX(-50%)',
+                          width: location.pathname === item.path ? '60%' : '0%',
+                          height: '2px',
+                          backgroundColor: theme.palette.primary.main,
+                          transition: 'width 0.3s ease',
+                        },
+                        '&:hover::after': {
+                          width: '60%',
+                        },
                       }}
                     >
                       {item.label}

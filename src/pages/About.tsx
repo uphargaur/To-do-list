@@ -18,7 +18,7 @@ import GroupsIcon from '@mui/icons-material/Groups';
 import EventIcon from '@mui/icons-material/Event';
 import StarIcon from '@mui/icons-material/Star';
 import { aboutContent } from '../utils/data';
-import shirnjaniImage from '../assets/images/shirnjani.png';
+import shirajamiImage from '../assets/images/Image_shirajani.jpeg';
 
 const About = () => {
   const theme = useTheme();
@@ -46,7 +46,7 @@ const About = () => {
               textAlign: 'center',
             }}
           >
-            About Shirnjani
+            About Shirajani
           </Typography>
           <Typography
             variant="h5"
@@ -64,8 +64,8 @@ const About = () => {
           <Grid item xs={12} md={5}>
             <Box
               component="img"
-              src={shirnjaniImage}
-              alt="Shirnjani"
+              src={shirajamiImage}
+              alt="Shirajani"
               sx={{
                 width: '100%',
                 borderRadius: 4,
@@ -75,7 +75,7 @@ const About = () => {
           </Grid>
           <Grid item xs={12} md={7}>
             <Typography variant="h3" sx={{ mb: 3, fontWeight: 600 }}>
-              Hi, I'm Shirnjani
+              Hi, I'm Shirajani
             </Typography>
             <Typography variant="h6" color="text.secondary" sx={{ mb: 3, lineHeight: 1.8 }}>
               {aboutContent.introduction}

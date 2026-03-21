@@ -11,17 +11,29 @@ const Footer = () => {
     <Box
       component="footer"
       sx={{
-        bgcolor: 'primary.main',
+        position: 'relative',
+        background: `linear-gradient(135deg, #2D3A5F 0%, #4A5A8D 100%)`,
         color: 'white',
         py: 6,
         mt: 'auto',
+        overflow: 'hidden',
+        '&::before': {
+          content: '""',
+          position: 'absolute',
+          top: '-50%',
+          right: '-10%',
+          width: '500px',
+          height: '500px',
+          background: 'radial-gradient(circle, rgba(229, 193, 88, 0.1) 0%, transparent 70%)',
+          borderRadius: '50%',
+        },
       }}
     >
       <Container maxWidth="lg">
         <Grid container spacing={4}>
           <Grid item xs={12} md={4}>
             <Typography variant="h6" gutterBottom fontWeight={700}>
-              Shirnjani
+              Shirajani
             </Typography>
             <Typography variant="body2" sx={{ mb: 2, opacity: 0.9 }}>
               Counselling Psychology • Tarot • Astrology • Numerology • Vastu
@@ -61,8 +73,8 @@ const Footer = () => {
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5 }}>
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                 <EmailIcon fontSize="small" />
-                <MuiLink href="mailto:t1346fh@gmail.com" color="inherit" underline="hover">
-                  t1346fh@gmail.com
+                <MuiLink href="mailto:Shirnjani33@gmail.com" color="inherit" underline="hover">
+                  Shirnjani33@gmail.com
                 </MuiLink>
               </Box>
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
@@ -92,7 +104,7 @@ const Footer = () => {
 
         <Box sx={{ mt: 4, pt: 3, borderTop: '1px solid rgba(255, 255, 255, 0.2)' }}>
           <Typography variant="body2" align="center" sx={{ opacity: 0.8 }}>
-            © {new Date().getFullYear()} Shirnjani. All rights reserved.
+            © {new Date().getFullYear()} Shirajani. All rights reserved.
           </Typography>
         </Box>
       </Container>

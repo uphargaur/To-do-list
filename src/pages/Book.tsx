@@ -73,7 +73,7 @@ const Book = () => {
       // Create booking in database
       try {
         setLoading(true);
-        const booking = await createBooking({
+        const bookingData = await createBooking({
           clientName,
           clientEmail,
           clientPhone,
@@ -85,9 +85,15 @@ const Book = () => {
           bookingDate: null,
           status: 'pending_payment',
         });
-        setBookingId(booking.id);
+        if (bookingData && bookingData.id) {
+          setBookingId(bookingData.id);
+        } else {
+          throw new Error('No booking ID received');
+        }
       } catch (err) {
+        console.error('Booking error:', err);
         setError('Failed to create booking. Please try again.');
+        setLoading(false);
         return;
       } finally {
         setLoading(false);
@@ -106,21 +112,18 @@ const Book = () => {
         if (bookingId) {
           const imageUrl = await uploadPaymentScreenshot(paymentFile, bookingId);
           // Update booking with payment screenshot
-          await createBooking({
-            clientName,
-            clientEmail,
-            clientPhone,
-            service: selectedService,
-            sessionDuration,
-            sessionPrice: selectedSessionOption?.price || 0,
+          const { updateBooking } = await import('../utils/supabase');
+          await updateBooking(bookingId, {
             paymentScreenshot: imageUrl,
-            paymentVerified: false,
-            bookingDate: null,
             status: 'payment_uploaded',
           });
+        } else {
+          throw new Error('No booking ID found');
         }
       } catch (err) {
+        console.error('Upload error:', err);
         setError('Failed to upload payment screenshot. Please try again.');
+        setLoading(false);
         return;
       } finally {
         setLoading(false);

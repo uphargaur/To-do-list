@@ -86,7 +86,7 @@ export const testimonials: Testimonial[] = [
   {
     id: '1',
     name: 'Priya Sharma',
-    text: 'Shirnjani helped me understand patterns in my life that I had been repeating for years. Her blend of psychology and tarot gave me the clarity I desperately needed.',
+    text: 'Shirajani helped me understand patterns in my life that I had been repeating for years. Her blend of psychology and tarot gave me the clarity I desperately needed.',
     rating: 5,
     service: 'Counseling & Tarot',
   },
@@ -107,7 +107,7 @@ export const testimonials: Testimonial[] = [
   {
     id: '4',
     name: 'Vikram Singh',
-    text: 'The Vastu consultation transformed my home environment. I feel more peaceful and productive now. Thank you, Shirnjani!',
+    text: 'The Vastu consultation transformed my home environment. I feel more peaceful and productive now. Thank you, Shirajani!',
     rating: 5,
     service: 'Vastu',
   },
@@ -121,14 +121,14 @@ export const testimonials: Testimonial[] = [
   {
     id: '6',
     name: 'Arjun Reddy',
-    text: 'Every session with Shirnjani brings new perspectives and healing. Her approach is both professional and deeply intuitive.',
+    text: 'Every session with Shirajani brings new perspectives and healing. Her approach is both professional and deeply intuitive.',
     rating: 5,
     service: 'Counseling & Astrology',
   },
 ];
 
 export const aboutContent = {
-  introduction: `I'm Shirnjani, a counselling psychologist, intuitive tarot reader, and astrology-numerology consultant who works at the intersection of mind, emotions, and destiny.`,
+  introduction: `I'm Shirajani, a counselling psychologist, intuitive tarot reader, and astrology-numerology consultant who works at the intersection of mind, emotions, and destiny.`,
 
   philosophy: `I believe that healing doesn't come from only talking, and it doesn't come from only predicting the future — it comes from understanding why you feel the way you do, why patterns repeat in your life, and how to consciously change them.`,
 
