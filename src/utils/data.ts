@@ -2,23 +2,6 @@ import { Service, Testimonial, SessionOption } from '../types';
 
 export const services: Service[] = [
   {
-    id: 'counseling',
-    name: 'Counseling Psychology',
-    description: 'Professional psychological counseling for emotional well-being and mental health.',
-    detailedDescription: `As a trained counseling psychologist, I provide a safe space for you to explore your emotions, thoughts, and behaviors. Whether you're dealing with anxiety, depression, relationship issues, or life transitions, I'm here to help you navigate through these challenges with evidence-based therapeutic approaches.
-
-My counseling sessions focus on:
-• Understanding your emotional patterns
-• Developing healthy coping strategies
-• Building self-awareness and emotional intelligence
-• Breaking free from limiting beliefs
-• Creating actionable steps for positive change`,
-    icon: 'psychology',
-    pricingOptions: [
-      { label: '1 Hour Session', duration: 60, price: 3100 },
-    ],
-  },
-  {
     id: 'tarot',
     name: 'Intuitive Tarot Reading',
     description: 'Gain clarity and insight into your life path through tarot card readings.',
@@ -32,7 +15,28 @@ What to expect:
 • Empowerment to take conscious action`,
     icon: 'auto_awesome',
     pricingOptions: [
-      { label: '30 Minutes Reading', duration: 30, price: 2100 },
+      { label: 'Quick Reading', duration: 15, price: 1100, description: 'Perfect for single question' },
+      { label: 'Standard Reading', duration: 30, price: 2100, description: 'Deep dive into your concerns' },
+      { label: 'Comprehensive Reading', duration: 45, price: 3100, description: 'Complete life analysis' },
+    ],
+  },
+  {
+    id: 'counseling',
+    name: 'Counseling Psychology',
+    description: 'Professional psychological counseling for emotional well-being and mental health.',
+    detailedDescription: `As a trained counseling psychologist, I provide a safe space for you to explore your emotions, thoughts, and behaviors. Whether you're dealing with anxiety, depression, relationship issues, or life transitions, I'm here to help you navigate through these challenges with evidence-based therapeutic approaches.
+
+My counseling sessions focus on:
+• Understanding your emotional patterns
+• Developing healthy coping strategies
+• Building self-awareness and emotional intelligence
+• Breaking free from limiting beliefs
+• Creating actionable steps for positive change`,
+    icon: 'psychology',
+    pricingOptions: [
+      { label: 'Express Session', duration: 30, price: 1500, description: 'Quick guidance & support' },
+      { label: 'Standard Session', duration: 45, price: 2000, description: 'In-depth counseling' },
+      { label: 'Extended Session', duration: 60, price: 3100, description: 'Comprehensive therapy' },
     ],
   },
   {
@@ -50,8 +54,9 @@ Consultation includes:
 • Life purpose and soul mission insights`,
     icon: 'nightlight',
     pricingOptions: [
-      { label: 'Basic Consultation', duration: 60, price: 3100 },
-      { label: 'Detailed Consultation', duration: 90, price: 5100 },
+      { label: 'Basic Consultation', duration: 45, price: 2500, description: 'Birth chart overview' },
+      { label: 'Standard Consultation', duration: 60, price: 3100, description: 'Detailed chart analysis' },
+      { label: 'Premium Consultation', duration: 90, price: 5100, description: 'Complete life roadmap' },
     ],
   },
   {
@@ -69,7 +74,9 @@ Analysis covers:
 • Career and relationship compatibility through numbers`,
     icon: 'calculate',
     pricingOptions: [
-      { label: 'Numerology + Tarot + Astrology (1 Hour)', duration: 60, price: 5100 },
+      { label: 'Basic Analysis', duration: 30, price: 1500, description: 'Core numbers & meanings' },
+      { label: 'Complete Analysis', duration: 45, price: 2500, description: 'Full numerology report' },
+      { label: 'Combined Package', duration: 60, price: 5100, description: 'Numerology + Tarot + Astrology' },
     ],
   },
   {
@@ -87,7 +94,9 @@ Consultation includes:
 • Remedies for Vastu doshas (defects)`,
     icon: 'home',
     pricingOptions: [
-      { label: 'Vastu Consultation', duration: 60, price: 4100 },
+      { label: 'Single Room Analysis', duration: 30, price: 2100, description: 'One room Vastu check' },
+      { label: 'Home Consultation', duration: 60, price: 4100, description: 'Complete home analysis' },
+      { label: 'Premium Package', duration: 90, price: 6100, description: 'Home + office + remedies' },
     ],
   },
   {
@@ -105,8 +114,9 @@ Healing includes:
 • Ongoing support and guidance`,
     icon: 'auto_awesome',
     pricingOptions: [
-      { label: '1 Week Program', description: 'Daily support', price: 7000 },
-      { label: '1 Month Program', description: 'Comprehensive healing', price: 15000 },
+      { label: 'Single Session', duration: 60, price: 3100, description: 'One-time healing session' },
+      { label: '1 Week Program', price: 7000, description: 'Daily support & guidance' },
+      { label: '1 Month Program', price: 15000, description: 'Complete transformation' },
     ],
   },
 ];

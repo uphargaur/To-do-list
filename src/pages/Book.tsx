@@ -154,7 +154,7 @@ const Book = () => {
             <Typography variant="h5" sx={{ mb: 3, fontWeight: 600 }}>
               Select a Service
             </Typography>
-            <Grid container spacing={3}>
+            <Grid container spacing={{ xs: 2, sm: 3 }}>
               {services.map((service) => (
                 <Grid item xs={12} sm={6} md={4} key={service.id}>
                   <Card
@@ -163,23 +163,28 @@ const Book = () => {
                       border:
                         selectedService === service.id
                           ? `2px solid ${theme.palette.primary.main}`
-                          : '1px solid #e0e0e0',
+                          : '1px solid rgba(0, 0, 0, 0.12)',
+                      backgroundColor: selectedService === service.id
+                        ? alpha(theme.palette.primary.main, 0.05)
+                        : 'white',
                       '&:hover': {
-                        borderColor: theme.palette.primary.light,
+                        borderColor: theme.palette.primary.main,
                         transform: 'translateY(-4px)',
+                        backgroundColor: alpha(theme.palette.primary.main, 0.08),
                       },
                       transition: 'all 0.3s ease',
+                      height: '100%',
                     }}
                     onClick={() => {
                       setSelectedService(service.id);
                       setSelectedPricingIndex(0); // Reset to first pricing option
                     }}
                   >
-                    <CardContent>
-                      <Typography variant="h6" sx={{ mb: 1, fontWeight: 600 }}>
+                    <CardContent sx={{ p: { xs: 2, sm: 3 } }}>
+                      <Typography variant="h6" sx={{ mb: 1, fontWeight: 600, fontSize: { xs: '1.1rem', sm: '1.25rem' } }}>
                         {service.name}
                       </Typography>
-                      <Typography variant="body2" color="text.secondary">
+                      <Typography variant="body2" color="text.secondary" sx={{ fontSize: { xs: '0.85rem', sm: '0.875rem' } }}>
                         {service.description}
                       </Typography>
                     </CardContent>
@@ -232,12 +237,15 @@ const Book = () => {
                           mb: 2,
                           border: '2px solid',
                           borderColor: selectedPricingIndex === index ? 'primary.main' : 'divider',
-                          borderRadius: 2,
-                          p: 2,
+                          borderRadius: { xs: 2, sm: 3 },
+                          p: { xs: 1.5, sm: 2 },
                           transition: 'all 0.3s ease',
+                          backgroundColor: selectedPricingIndex === index
+                            ? alpha(theme.palette.primary.main, 0.08)
+                            : 'transparent',
                           '&:hover': {
                             borderColor: 'primary.light',
-                            backgroundColor: alpha(theme.palette.primary.main, 0.05),
+                            backgroundColor: alpha(theme.palette.primary.main, 0.1),
                           }
                         }}
                       />
@@ -405,8 +413,18 @@ const Book = () => {
         </Container>
       </Box>
 
-      <Container maxWidth="md" sx={{ py: 6 }}>
-        <Stepper activeStep={activeStep} sx={{ mb: 4 }}>
+      <Container maxWidth="md" sx={{ py: { xs: 3, md: 6 } }}>
+        <Stepper
+          activeStep={activeStep}
+          sx={{
+            mb: { xs: 3, md: 4 },
+            '& .MuiStepLabel-label': {
+              fontSize: { xs: '0.75rem', sm: '0.875rem' },
+            }
+          }}
+          orientation={{ xs: 'vertical', sm: 'horizontal' }}
+          alternativeLabel={false}
+        >
           {steps.map((label) => (
             <Step key={label}>
               <StepLabel>{label}</StepLabel>
@@ -414,7 +432,7 @@ const Book = () => {
           ))}
         </Stepper>
 
-        <Card sx={{ p: 4 }}>
+        <Card sx={{ p: { xs: 2, sm: 3, md: 4 } }}>
           {error && (
             <Alert severity="error" sx={{ mb: 3 }}>
               {error}
