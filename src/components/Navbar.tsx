@@ -84,7 +84,7 @@ const Navbar = () => {
                 fontSize: { xs: '1.25rem', md: '1.5rem' },
               }}
             >
-              Shirajani
+              Shirnjani
             </Typography>
 
             {isMobile ? (

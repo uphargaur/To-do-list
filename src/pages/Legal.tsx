@@ -116,7 +116,7 @@ const Legal = () => {
                 Service Agreement
               </Typography>
               <Typography variant="body1">
-                By booking a session with Shirajani, you agree to these terms and conditions.
+                By booking a session with Shirnjani, you agree to these terms and conditions.
               </Typography>
 
               <Typography variant="h6" sx={{ fontWeight: 600, mt: 3 }}>
@@ -214,7 +214,7 @@ const Legal = () => {
                 Limitation of Liability
               </Typography>
               <Typography variant="body1">
-                To the fullest extent permitted by law, Shirajani shall not be liable for any
+                To the fullest extent permitted by law, Shirnjani shall not be liable for any
                 indirect, incidental, special, or consequential damages arising from the use of our
                 services.
               </Typography>
@@ -245,7 +245,7 @@ const Legal = () => {
               <strong>Email:</strong> Shirnjani659@gmail.com
             </Typography>
             <Typography variant="body1">
-              <strong>Name:</strong> Shirajani
+              <strong>Name:</strong> Shirnjani
             </Typography>
             <Typography variant="body2" color="text.secondary" sx={{ mt: 3 }}>
               Last updated: {new Date().toLocaleDateString()}

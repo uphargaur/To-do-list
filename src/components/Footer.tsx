@@ -43,7 +43,7 @@ const Footer = () => {
         <Grid container spacing={4}>
           <Grid item xs={12} md={4}>
             <Typography variant="h6" gutterBottom fontWeight={700}>
-              Shirajani
+              Shirnjani
             </Typography>
             <Typography variant="body2" sx={{ mb: 2, opacity: 0.9 }}>
               Counselling Psychology • Tarot • Astrology • Numerology • Vastu
@@ -114,7 +114,7 @@ const Footer = () => {
 
         <Box sx={{ mt: { xs: 3, md: 4 }, pt: { xs: 2, md: 3 }, borderTop: '1px solid rgba(255, 255, 255, 0.2)' }}>
           <Typography variant="body2" align="center" sx={{ opacity: 0.95, fontWeight: 600 }}>
-            © {new Date().getFullYear()} Shirajani. All rights reserved.
+            © {new Date().getFullYear()} Shirnjani. All rights reserved.
           </Typography>
         </Box>
       </Container>

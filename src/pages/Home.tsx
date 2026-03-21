@@ -21,7 +21,7 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import SpaIcon from '@mui/icons-material/Spa';
 import SelfImprovementIcon from '@mui/icons-material/SelfImprovement';
 import { services, testimonials } from '../utils/data';
-import shirajamiImage from '../assets/images/Image_shirajani.jpeg';
+import shirajamiImage from '../assets/images/Image_shirnjani.jpeg';
 
 const iconMap: Record<string, any> = {
   psychology: PsychologyIcon,
@@ -268,7 +268,7 @@ const Home = () => {
                 <Box
                   component="img"
                   src={shirajamiImage}
-                  alt="Shirajani"
+                  alt="Shirnjani"
                   sx={{
                     position: 'relative',
                     width: '100%',
