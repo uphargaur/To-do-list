@@ -17,7 +17,7 @@ import NightlightIcon from '@mui/icons-material/Nightlight';
 import CalculateIcon from '@mui/icons-material/Calculate';
 import HomeIcon from '@mui/icons-material/Home';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import { services, sessionOptions } from '../utils/data';
+import { services } from '../utils/data';
 
 const iconMap: Record<string, any> = {
   psychology: PsychologyIcon,
@@ -130,19 +130,19 @@ const Services = () => {
       <Box sx={{ bgcolor: alpha(theme.palette.primary.main, 0.05), py: 10 }}>
         <Container maxWidth="lg">
           <Typography variant="h2" sx={{ mb: 2, fontWeight: 700, textAlign: 'center' }}>
-            Session Pricing
+            Flexible Pricing for Every Need
           </Typography>
           <Typography
             variant="h6"
             color="text.secondary"
             sx={{ mb: 6, textAlign: 'center', maxWidth: 700, mx: 'auto' }}
           >
-            Choose the session duration that works best for you
+            Each service offers multiple package options. View pricing when booking.
           </Typography>
 
           <Grid container spacing={4} justifyContent="center">
-            {sessionOptions.map((option, index) => (
-              <Grid item xs={12} sm={6} md={4} key={index}>
+            {services.slice(0, 3).map((service, index) => (
+              <Grid item xs={12} sm={6} md={4} key={service.id}>
                 <Card
                   sx={{
                     textAlign: 'center',
@@ -151,10 +151,6 @@ const Services = () => {
                     display: 'flex',
                     flexDirection: 'column',
                     transition: 'all 0.3s ease',
-                    border:
-                      option.duration === 60
-                        ? `2px solid ${theme.palette.primary.main}`
-                        : '1px solid transparent',
                     '&:hover': {
                       transform: 'translateY(-8px)',
                       boxShadow: `0 12px 40px ${alpha(theme.palette.primary.main, 0.2)}`,
@@ -162,40 +158,27 @@ const Services = () => {
                   }}
                 >
                   <CardContent sx={{ flexGrow: 1 }}>
-                    {option.duration === 60 && (
-                      <Typography
-                        variant="caption"
-                        sx={{
-                          bgcolor: theme.palette.primary.main,
-                          color: 'white',
-                          px: 2,
-                          py: 0.5,
-                          borderRadius: 1,
-                          mb: 2,
-                          display: 'inline-block',
-                        }}
-                      >
-                        POPULAR
-                      </Typography>
-                    )}
-                    <Typography variant="h4" sx={{ mb: 1, fontWeight: 600 }}>
-                      {option.duration} Minutes
+                    <Typography variant="h4" sx={{ mb: 2, fontWeight: 600 }}>
+                      {service.name}
                     </Typography>
                     <Divider sx={{ my: 2 }} />
+                    <Typography variant="h6" sx={{ mb: 2, color: 'primary.main', fontWeight: 600 }}>
+                      Starting from
+                    </Typography>
                     <Typography variant="h2" sx={{ mb: 1, fontWeight: 700, color: 'primary.main' }}>
-                      ₹{option.price}
+                      ₹{Math.min(...service.pricingOptions.map(opt => opt.price)).toLocaleString('en-IN')}
                     </Typography>
                     <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
-                      per session
+                      {service.pricingOptions.length} packages available
                     </Typography>
                     <Button
                       component={Link}
                       to="/book"
-                      variant={option.duration === 60 ? 'contained' : 'outlined'}
+                      variant="contained"
                       fullWidth
                       size="large"
                     >
-                      Book Now
+                      View Packages
                     </Button>
                   </CardContent>
                 </Card>
@@ -207,6 +190,16 @@ const Services = () => {
             <Typography variant="body1" color="text.secondary">
               All sessions include personalized guidance and follow-up support
             </Typography>
+            <Button
+              component={Link}
+              to="/book"
+              variant="outlined"
+              size="large"
+              sx={{ mt: 3 }}
+              endIcon={<ArrowForwardIcon />}
+            >
+              View All Pricing Options
+            </Button>
           </Box>
         </Container>
       </Box>

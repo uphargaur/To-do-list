@@ -422,8 +422,6 @@ const Book = () => {
               fontSize: { xs: '0.75rem', sm: '0.875rem' },
             }
           }}
-          orientation={{ xs: 'vertical', sm: 'horizontal' }}
-          alternativeLabel={false}
         >
           {steps.map((label) => (
             <Step key={label}>
