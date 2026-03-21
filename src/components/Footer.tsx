@@ -79,7 +79,7 @@ const Footer = () => {
               </Box>
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                 <PhoneIcon fontSize="small" />
-                <Typography variant="body2">+91 XXXXX XXXXX</Typography>
+                <Typography variant="body2">+91 82187 01093</Typography>
               </Box>
             </Box>
 
