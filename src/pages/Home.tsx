@@ -478,8 +478,13 @@ const Home = () => {
           sx={{
             position: 'relative',
             overflow: 'hidden',
-            background: `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.primary.dark})`,
-            color: 'white',
+            background: `linear-gradient(135deg, ${alpha(theme.palette.primary.main, 0.12)} 0%, ${alpha(
+              theme.palette.secondary.main,
+              0.08
+            )} 100%)`,
+            border: `2px solid ${alpha(theme.palette.primary.main, 0.25)}`,
+            color: theme.palette.text.primary,
+            boxShadow: 'none',
             '&::before': {
               content: '""',
               position: 'absolute',
@@ -487,7 +492,7 @@ const Home = () => {
               right: '-20%',
               width: '400px',
               height: '400px',
-              background: `radial-gradient(circle, ${alpha(theme.palette.secondary.main, 0.3)} 0%, transparent 70%)`,
+              background: `radial-gradient(circle, ${alpha(theme.palette.secondary.main, 0.08)} 0%, transparent 70%)`,
               borderRadius: '50%',
               animation: 'gentlePulse 10s ease-in-out infinite',
             },
@@ -498,18 +503,18 @@ const Home = () => {
               left: '-10%',
               width: '300px',
               height: '300px',
-              background: `radial-gradient(circle, ${alpha(theme.palette.secondary.main, 0.2)} 0%, transparent 70%)`,
+              background: `radial-gradient(circle, ${alpha(theme.palette.secondary.main, 0.06)} 0%, transparent 70%)`,
               borderRadius: '50%',
               animation: 'gentlePulse 8s ease-in-out infinite',
               animationDelay: '3s',
             },
           }}
         >
-          <CardContent sx={{ p: 6, textAlign: 'center', position: 'relative', zIndex: 1 }}>
-            <Typography variant="h3" sx={{ mb: 2, fontWeight: 700 }}>
+          <CardContent sx={{ p: { xs: 4, md: 6 }, textAlign: 'center', position: 'relative', zIndex: 1 }}>
+            <Typography variant="h3" sx={{ mb: 2, fontWeight: 700, color: 'primary.main' }}>
               Ready to Begin Your Journey?
             </Typography>
-            <Typography variant="h6" sx={{ mb: 4, opacity: 0.95 }}>
+            <Typography variant="h6" sx={{ mb: 4, color: 'text.secondary' }}>
               Book your first session today and take the first step towards clarity and
               transformation.
             </Typography>
@@ -519,14 +524,19 @@ const Home = () => {
               variant="contained"
               size="large"
               sx={{
-                bgcolor: 'white',
-                color: theme.palette.primary.main,
-                boxShadow: `0 8px 32px ${alpha('#000', 0.2)}`,
+                background: `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.secondary.main} 100%)`,
+                color: 'white',
+                fontSize: '1.1rem',
+                fontWeight: 700,
+                px: 5,
+                py: 2,
+                boxShadow: `0 8px 24px ${alpha(theme.palette.primary.main, 0.35)}`,
                 '&:hover': {
-                  bgcolor: alpha('#ffffff', 0.95),
-                  transform: 'translateY(-4px)',
-                  boxShadow: `0 12px 40px ${alpha('#000', 0.3)}`,
+                  background: `linear-gradient(135deg, ${theme.palette.primary.dark} 0%, ${theme.palette.secondary.dark} 100%)`,
+                  boxShadow: `0 12px 32px ${alpha(theme.palette.primary.main, 0.45)}`,
+                  transform: 'translateY(-2px)',
                 },
+                transition: 'all 0.3s ease',
               }}
             >
               Book Now

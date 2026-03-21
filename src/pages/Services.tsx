@@ -208,16 +208,21 @@ const Services = () => {
       <Container maxWidth="md" sx={{ py: 10 }}>
         <Card
           sx={{
-            background: `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
-            color: 'white',
-            p: 6,
+            background: `linear-gradient(135deg, ${alpha(theme.palette.primary.main, 0.15)} 0%, ${alpha(
+              theme.palette.secondary.main,
+              0.1
+            )} 100%)`,
+            border: `2px solid ${alpha(theme.palette.primary.main, 0.3)}`,
+            color: theme.palette.text.primary,
+            p: { xs: 4, md: 6 },
             textAlign: 'center',
+            boxShadow: 'none',
           }}
         >
-          <Typography variant="h3" sx={{ mb: 2, fontWeight: 700 }}>
+          <Typography variant="h3" sx={{ mb: 2, fontWeight: 700, color: 'primary.main' }}>
             Ready to Start Your Journey?
           </Typography>
-          <Typography variant="h6" sx={{ mb: 4, opacity: 0.95 }}>
+          <Typography variant="h6" sx={{ mb: 4, color: 'text.secondary' }}>
             Book your session now and take the first step towards transformation
           </Typography>
           <Button
@@ -227,14 +232,22 @@ const Services = () => {
             size="large"
             endIcon={<ArrowForwardIcon />}
             sx={{
-              bgcolor: 'white',
-              color: theme.palette.primary.main,
+              background: `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.secondary.main} 100%)`,
+              color: 'white',
+              fontSize: '1.1rem',
+              fontWeight: 700,
+              px: 5,
+              py: 2,
+              boxShadow: `0 8px 24px ${alpha(theme.palette.primary.main, 0.35)}`,
               '&:hover': {
-                bgcolor: alpha('#ffffff', 0.9),
+                background: `linear-gradient(135deg, ${theme.palette.primary.dark} 0%, ${theme.palette.secondary.dark} 100%)`,
+                boxShadow: `0 12px 32px ${alpha(theme.palette.primary.main, 0.45)}`,
+                transform: 'translateY(-2px)',
               },
+              transition: 'all 0.3s ease',
             }}
           >
-            Book a Session
+            Book Now
           </Button>
         </Card>
       </Container>
