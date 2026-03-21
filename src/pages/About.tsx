@@ -18,7 +18,6 @@ import GroupsIcon from '@mui/icons-material/Groups';
 import EventIcon from '@mui/icons-material/Event';
 import StarIcon from '@mui/icons-material/Star';
 import { aboutContent } from '../utils/data';
-import shirajamiImage from '../assets/images/Image_shirnjani.jpeg';
 
 const About = () => {
   const theme = useTheme();
@@ -62,16 +61,134 @@ const About = () => {
       <Container maxWidth="lg" sx={{ py: 8 }}>
         <Grid container spacing={6} alignItems="center">
           <Grid item xs={12} md={5}>
+            {/* Spiritual Lotus Mandala Illustration */}
             <Box
-              component="img"
-              src={shirajamiImage}
-              alt="Shirnjani"
               sx={{
                 width: '100%',
+                aspectRatio: '1',
                 borderRadius: 4,
-                boxShadow: `0 20px 60px ${alpha(theme.palette.primary.main, 0.3)}`,
               }}
-            />
+            >
+              <svg
+                viewBox="0 0 400 400"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                style={{ width: '100%', height: '100%' }}
+              >
+                {/* Background Circle */}
+                <circle cx="200" cy="200" r="190" fill={alpha(theme.palette.primary.main, 0.08)} />
+
+                {/* Outer Ring */}
+                <circle cx="200" cy="200" r="180" stroke={alpha(theme.palette.secondary.main, 0.3)} strokeWidth="2" fill="none" />
+
+                {/* Lotus Petals - Outer Layer */}
+                {[...Array(12)].map((_, i) => {
+                  const angle = (i * 30 * Math.PI) / 180;
+                  const x = 200 + Math.cos(angle) * 120;
+                  const y = 200 + Math.sin(angle) * 120;
+                  return (
+                    <ellipse
+                      key={`outer-${i}`}
+                      cx={x}
+                      cy={y}
+                      rx="40"
+                      ry="60"
+                      fill={alpha(theme.palette.primary.main, 0.15)}
+                      stroke={alpha(theme.palette.primary.main, 0.4)}
+                      strokeWidth="1.5"
+                      transform={`rotate(${i * 30} ${x} ${y})`}
+                    />
+                  );
+                })}
+
+                {/* Lotus Petals - Middle Layer */}
+                {[...Array(8)].map((_, i) => {
+                  const angle = (i * 45 * Math.PI) / 180;
+                  const x = 200 + Math.cos(angle) * 80;
+                  const y = 200 + Math.sin(angle) * 80;
+                  return (
+                    <ellipse
+                      key={`middle-${i}`}
+                      cx={x}
+                      cy={y}
+                      rx="35"
+                      ry="50"
+                      fill={alpha(theme.palette.secondary.main, 0.2)}
+                      stroke={alpha(theme.palette.secondary.main, 0.5)}
+                      strokeWidth="1.5"
+                      transform={`rotate(${i * 45} ${x} ${y})`}
+                    />
+                  );
+                })}
+
+                {/* Lotus Petals - Inner Layer */}
+                {[...Array(6)].map((_, i) => {
+                  const angle = (i * 60 * Math.PI) / 180;
+                  const x = 200 + Math.cos(angle) * 50;
+                  const y = 200 + Math.sin(angle) * 50;
+                  return (
+                    <ellipse
+                      key={`inner-${i}`}
+                      cx={x}
+                      cy={y}
+                      rx="25"
+                      ry="40"
+                      fill={alpha(theme.palette.primary.main, 0.25)}
+                      stroke={alpha(theme.palette.primary.main, 0.6)}
+                      strokeWidth="2"
+                      transform={`rotate(${i * 60} ${x} ${y})`}
+                    />
+                  );
+                })}
+
+                {/* Center Circle - Om Symbol Base */}
+                <circle cx="200" cy="200" r="45" fill={alpha(theme.palette.secondary.main, 0.15)} />
+                <circle cx="200" cy="200" r="45" stroke={theme.palette.primary.main} strokeWidth="2" fill="none" />
+
+                {/* Om Symbol - Stylized */}
+                <g transform="translate(200, 200)">
+                  {/* 3 */}
+                  <path
+                    d="M -20 -10 Q -25 -20, -15 -25 Q -5 -30, 5 -20 Q 10 -15, 5 -5 Q 0 0, -10 5"
+                    stroke={theme.palette.primary.main}
+                    strokeWidth="3"
+                    fill="none"
+                    strokeLinecap="round"
+                  />
+
+                  {/* Upper dot */}
+                  <circle cx="-5" cy="-30" r="4" fill={theme.palette.secondary.main} />
+
+                  {/* Curve */}
+                  <path
+                    d="M -15 10 Q 0 25, 15 10"
+                    stroke={theme.palette.primary.main}
+                    strokeWidth="3.5"
+                    fill="none"
+                    strokeLinecap="round"
+                  />
+
+                  {/* Small dot on right */}
+                  <circle cx="20" cy="0" r="5" fill={theme.palette.secondary.main} />
+                </g>
+
+                {/* Decorative Stars */}
+                {[...Array(8)].map((_, i) => {
+                  const angle = (i * 45 * Math.PI) / 180;
+                  const x = 200 + Math.cos(angle) * 160;
+                  const y = 200 + Math.sin(angle) * 160;
+                  return (
+                    <circle
+                      key={`star-${i}`}
+                      cx={x}
+                      cy={y}
+                      r="3"
+                      fill={alpha(theme.palette.secondary.main, 0.6)}
+                    />
+                  );
+                })}
+              </svg>
+            </Box>
           </Grid>
           <Grid item xs={12} md={7}>
             <Typography variant="h3" sx={{ mb: 3, fontWeight: 600 }}>
