@@ -386,7 +386,10 @@ const Book = () => {
                     boxShadow: `0 12px 32px ${alpha(theme.palette.primary.main, 0.45)}`,
                   },
                 }}
-                onClick={() => {
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+
                   const upiId = '9756666993@pthdfc';
                   const name = 'Shirnjani';
                   const amount = selectedPricingOption?.price || 0;
@@ -395,18 +398,24 @@ const Book = () => {
                   const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !(window as any).MSStream;
 
                   if (isIOS) {
-                    // For iOS, try PhonePe deep link first
-                    const phonePeUrl = `phonepe://pay?pa=${upiId}&pn=${encodeURIComponent(name)}&am=${amount}&cu=INR`;
-                    window.location.href = phonePeUrl;
+                    // For iOS, show alert with UPI ID and copy to clipboard
+                    navigator.clipboard.writeText(upiId).then(() => {
+                      alert(`UPI ID copied to clipboard!\n\nUPI ID: ${upiId}\nAmount: ₹${amount.toLocaleString('en-IN')}\n\nPlease open PhonePe, Google Pay, Paytm or any UPI app and paste the UPI ID to make payment.`);
+                    }).catch(() => {
+                      alert(`Please pay via UPI:\n\nUPI ID: ${upiId}\nAmount: ₹${amount.toLocaleString('en-IN')}\n\nOpen PhonePe, Google Pay, Paytm or any UPI app to make payment.`);
+                    });
 
-                    // Copy UPI ID to clipboard as fallback
-                    setTimeout(() => {
-                      navigator.clipboard.writeText(upiId).then(() => {
-                        alert(`UPI ID copied to clipboard: ${upiId}\n\nAmount: ₹${amount.toLocaleString('en-IN')}\n\nPlease open PhonePe, Google Pay, or any UPI app and paste the UPI ID to make payment.`);
-                      }).catch(() => {
-                        alert(`Please pay ₹${amount.toLocaleString('en-IN')} to:\n\nUPI ID: ${upiId}\n\nOpen PhonePe or Google Pay to make payment.`);
-                      });
-                    }, 1500);
+                    // Try to open PhonePe app (might work, might not)
+                    try {
+                      const phonePeUrl = `phonepe://pay?pa=${upiId}&pn=${encodeURIComponent(name)}&am=${amount}&cu=INR`;
+                      const iframe = document.createElement('iframe');
+                      iframe.style.display = 'none';
+                      iframe.src = phonePeUrl;
+                      document.body.appendChild(iframe);
+                      setTimeout(() => document.body.removeChild(iframe), 2000);
+                    } catch (err) {
+                      console.log('PhonePe deep link failed:', err);
+                    }
                   } else {
                     // For Android, use standard UPI link
                     const upiLink = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(name)}&am=${amount}&cu=INR`;
