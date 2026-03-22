@@ -390,8 +390,28 @@ const Book = () => {
                   const upiId = '9756666993@pthdfc';
                   const name = 'Shirnjani';
                   const amount = selectedPricingOption?.price || 0;
-                  const upiLink = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(name)}&am=${amount}&cu=INR`;
-                  window.location.href = upiLink;
+
+                  // Detect iOS
+                  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !(window as any).MSStream;
+
+                  if (isIOS) {
+                    // For iOS, try PhonePe deep link first
+                    const phonePeUrl = `phonepe://pay?pa=${upiId}&pn=${encodeURIComponent(name)}&am=${amount}&cu=INR`;
+                    window.location.href = phonePeUrl;
+
+                    // Copy UPI ID to clipboard as fallback
+                    setTimeout(() => {
+                      navigator.clipboard.writeText(upiId).then(() => {
+                        alert(`UPI ID copied to clipboard: ${upiId}\n\nAmount: ₹${amount.toLocaleString('en-IN')}\n\nPlease open PhonePe, Google Pay, or any UPI app and paste the UPI ID to make payment.`);
+                      }).catch(() => {
+                        alert(`Please pay ₹${amount.toLocaleString('en-IN')} to:\n\nUPI ID: ${upiId}\n\nOpen PhonePe or Google Pay to make payment.`);
+                      });
+                    }, 1500);
+                  } else {
+                    // For Android, use standard UPI link
+                    const upiLink = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(name)}&am=${amount}&cu=INR`;
+                    window.location.href = upiLink;
+                  }
                 }}
               >
                 Pay ₹{selectedPricingOption?.price.toLocaleString('en-IN')} via PhonePe/UPI
