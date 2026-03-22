@@ -544,21 +544,106 @@ const Book = () => {
       case 4:
         return (
           <Box sx={{ textAlign: 'center', py: 4 }}>
+            <Box
+              sx={{
+                width: 80,
+                height: 80,
+                borderRadius: '50%',
+                bgcolor: alpha(theme.palette.success.main, 0.1),
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                mx: 'auto',
+                mb: 3,
+              }}
+            >
+              <Typography variant="h1" sx={{ color: 'success.main' }}>
+                ✓
+              </Typography>
+            </Box>
             <Typography variant="h4" sx={{ mb: 2, fontWeight: 600, color: 'success.main' }}>
               Booking Submitted Successfully!
             </Typography>
-            <Typography variant="body1" sx={{ mb: 3 }}>
-              Thank you for your booking. Your payment is being verified by our admin.
+            <Typography variant="body1" sx={{ mb: 3, fontSize: '1.1rem' }}>
+              Thank you for your booking. Your payment is being verified by our team.
             </Typography>
-            <Alert severity="info" sx={{ mb: 3 }}>
-              Once your payment is verified, you will receive an email with a link to schedule your
-              session on the calendar.
+
+            <Alert severity="success" sx={{ mb: 3, textAlign: 'left' }}>
+              <Typography variant="subtitle1" sx={{ fontWeight: 600, mb: 1 }}>
+                What happens next?
+              </Typography>
+              <Typography variant="body2" component="div">
+                • We will verify your payment within <strong>12 hours</strong>
+                <br />
+                • You will receive an email with a calendar link to schedule your session
+                <br />
+                • Our team will contact you on WhatsApp to confirm your booking
+              </Typography>
             </Alert>
-            <Typography variant="body2" color="text.secondary">
-              Booking ID: {bookingId}
-            </Typography>
-            <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
-              Please save this ID for your records.
+
+            <Card sx={{ p: 3, mb: 3, bgcolor: alpha(theme.palette.primary.main, 0.05) }}>
+              <Typography variant="h6" sx={{ mb: 2, fontWeight: 600 }}>
+                Booking Details
+              </Typography>
+              <Grid container spacing={2} sx={{ textAlign: 'left' }}>
+                <Grid item xs={12} sm={6}>
+                  <Typography variant="body2" color="text.secondary">
+                    Booking ID
+                  </Typography>
+                  <Typography variant="body1" sx={{ fontWeight: 600 }}>
+                    {bookingId}
+                  </Typography>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <Typography variant="body2" color="text.secondary">
+                    Service
+                  </Typography>
+                  <Typography variant="body1" sx={{ fontWeight: 600 }}>
+                    {currentService?.name}
+                  </Typography>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <Typography variant="body2" color="text.secondary">
+                    Package
+                  </Typography>
+                  <Typography variant="body1" sx={{ fontWeight: 600 }}>
+                    {selectedPricingOption?.label}
+                  </Typography>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <Typography variant="body2" color="text.secondary">
+                    Amount Paid
+                  </Typography>
+                  <Typography variant="body1" sx={{ fontWeight: 600, color: 'primary.main' }}>
+                    ₹{selectedPricingOption?.price.toLocaleString('en-IN')}
+                  </Typography>
+                </Grid>
+              </Grid>
+            </Card>
+
+            <Button
+              variant="contained"
+              size="large"
+              fullWidth
+              sx={{
+                maxWidth: 400,
+                mb: 2,
+                background: '#25D366',
+                '&:hover': {
+                  background: '#20BA5A',
+                },
+              }}
+              onClick={() => {
+                const message = `Hi, I've just completed my booking for ${currentService?.name}.\n\nBooking ID: ${bookingId}\nPackage: ${selectedPricingOption?.label}\nAmount: ₹${selectedPricingOption?.price.toLocaleString('en-IN')}\n\nPlease verify my payment and confirm my booking. Thank you!`;
+                const whatsappUrl = `https://wa.me/918218701093?text=${encodeURIComponent(message)}`;
+                window.open(whatsappUrl, '_blank');
+              }}
+            >
+              Send Booking Details on WhatsApp
+            </Button>
+
+            <Typography variant="body2" color="text.secondary" sx={{ mt: 2 }}>
+              Please save your Booking ID: <strong>{bookingId}</strong> for future reference
             </Typography>
           </Box>
         );
