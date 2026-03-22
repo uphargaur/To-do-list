@@ -400,22 +400,39 @@ const Book = () => {
                   if (isIOS) {
                     // For iOS, show alert with UPI ID and copy to clipboard
                     navigator.clipboard.writeText(upiId).then(() => {
-                      alert(`UPI ID copied to clipboard!\n\nUPI ID: ${upiId}\nAmount: ₹${amount.toLocaleString('en-IN')}\n\nPlease open PhonePe, Google Pay, Paytm or any UPI app and paste the UPI ID to make payment.`);
+                      alert(`UPI ID copied to clipboard!\n\nUPI ID: ${upiId}\nAmount: ₹${amount.toLocaleString('en-IN')}\n\nPlease open any UPI app (PhonePe, Google Pay, Paytm, BHIM, Amazon Pay, MobiKwik) and paste the UPI ID to make payment.`);
                     }).catch(() => {
-                      alert(`Please pay via UPI:\n\nUPI ID: ${upiId}\nAmount: ₹${amount.toLocaleString('en-IN')}\n\nOpen PhonePe, Google Pay, Paytm or any UPI app to make payment.`);
+                      alert(`Please pay via UPI:\n\nUPI ID: ${upiId}\nAmount: ₹${amount.toLocaleString('en-IN')}\n\nOpen any UPI app to make payment.`);
                     });
 
-                    // Try to open PhonePe app (might work, might not)
-                    try {
-                      const phonePeUrl = `phonepe://pay?pa=${upiId}&pn=${encodeURIComponent(name)}&am=${amount}&cu=INR`;
-                      const iframe = document.createElement('iframe');
-                      iframe.style.display = 'none';
-                      iframe.src = phonePeUrl;
-                      document.body.appendChild(iframe);
-                      setTimeout(() => document.body.removeChild(iframe), 2000);
-                    } catch (err) {
-                      console.log('PhonePe deep link failed:', err);
-                    }
+                    // Try to open multiple UPI apps (try all popular ones)
+                    const upiApps = [
+                      `phonepe://pay?pa=${upiId}&pn=${encodeURIComponent(name)}&am=${amount}&cu=INR`,
+                      `paytmmp://pay?pa=${upiId}&pn=${encodeURIComponent(name)}&am=${amount}&cu=INR`,
+                      `tez://upi/pay?pa=${upiId}&pn=${encodeURIComponent(name)}&am=${amount}&cu=INR`, // Google Pay
+                      `bhim://pay?pa=${upiId}&pn=${encodeURIComponent(name)}&am=${amount}&cu=INR`,
+                      `mobikwik://upi?pa=${upiId}&pn=${encodeURIComponent(name)}&am=${amount}&cu=INR`,
+                      `amazonpay://pay?pa=${upiId}&pn=${encodeURIComponent(name)}&am=${amount}&cu=INR`,
+                    ];
+
+                    // Try each app with a small delay
+                    upiApps.forEach((appUrl, index) => {
+                      try {
+                        setTimeout(() => {
+                          const iframe = document.createElement('iframe');
+                          iframe.style.display = 'none';
+                          iframe.src = appUrl;
+                          document.body.appendChild(iframe);
+                          setTimeout(() => {
+                            try {
+                              document.body.removeChild(iframe);
+                            } catch (e) {}
+                          }, 1000);
+                        }, index * 200);
+                      } catch (err) {
+                        console.log(`UPI app ${index} deep link failed:`, err);
+                      }
+                    });
                   } else {
                     // For Android, use standard UPI link
                     const upiLink = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(name)}&am=${amount}&cu=INR`;
