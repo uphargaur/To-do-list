@@ -364,11 +364,49 @@ const Book = () => {
               </Typography>
             </Card>
 
-            <Typography variant="h6" sx={{ mb: 2 }}>
-              Pay via UPI
+            <Typography variant="h6" sx={{ mb: 2, textAlign: 'center' }}>
+              Complete Payment
             </Typography>
 
-            {/* UPI Payment Button */}
+            <Alert severity="info" sx={{ mb: 3, maxWidth: 500, mx: 'auto' }}>
+              <Typography variant="body2" sx={{ fontWeight: 600, mb: 1 }}>
+                Recommended: Scan QR Code
+              </Typography>
+              <Typography variant="body2">
+                Some UPI apps may block direct UPI ID payments. For best results, please scan the QR code below.
+              </Typography>
+            </Alert>
+
+            {/* QR Code - Make it primary */}
+            <Box sx={{ mb: 3, textAlign: 'center' }}>
+              <Typography variant="subtitle1" sx={{ mb: 2, fontWeight: 600 }}>
+                Scan QR Code to Pay
+              </Typography>
+              <Box sx={{ display: 'flex', justifyContent: 'center', mb: 2 }}>
+                <Box
+                  component="img"
+                  src={paymentQR}
+                  alt="Payment QR Code"
+                  sx={{
+                    maxWidth: 300,
+                    width: '100%',
+                    border: `3px solid ${theme.palette.primary.main}`,
+                    borderRadius: 2,
+                    p: 2,
+                    boxShadow: `0 4px 12px ${alpha(theme.palette.primary.main, 0.2)}`,
+                  }}
+                />
+              </Box>
+              <Typography variant="body2" color="text.secondary">
+                Works with all UPI apps - No restrictions
+              </Typography>
+            </Box>
+
+            <Box sx={{ textAlign: 'center', mb: 3 }}>
+              <Typography variant="body2" sx={{ mb: 1, fontWeight: 600 }}>OR</Typography>
+            </Box>
+
+            {/* UPI Payment Button - Secondary option */}
             <Box sx={{ mb: 3, textAlign: 'center' }}>
               {/* Detect iOS */}
               {/iPad|iPhone|iPod/.test(navigator.userAgent) && !(window as any).MSStream ? (
@@ -484,35 +522,22 @@ const Book = () => {
                 </Button>
               )}
               <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
-                UPI ID: 9756666993@pthdfc
+                UPI ID: 9756666993@pthdfc (if supported by your app)
               </Typography>
             </Box>
 
-            <Typography variant="h6" sx={{ mb: 2, textAlign: 'center' }}>
-              OR Scan QR Code
-            </Typography>
-            <Box sx={{ display: 'flex', justifyContent: 'center', mb: 3 }}>
-              <Box
-                component="img"
-                src={paymentQR}
-                alt="Payment QR Code"
-                sx={{
-                  maxWidth: 300,
-                  width: '100%',
-                  border: `2px solid ${theme.palette.primary.main}`,
-                  borderRadius: 2,
-                  p: 2,
-                }}
-              />
+            <Box sx={{ borderTop: `1px solid ${theme.palette.divider}`, pt: 3, mt: 3 }}>
+              <Typography variant="h6" sx={{ mb: 2, textAlign: 'center' }}>
+                Upload Payment Screenshot
+              </Typography>
+              <Typography variant="body1" sx={{ mb: 2 }}>
+                After completing the payment, please upload a screenshot of the payment confirmation:
+              </Typography>
+              <Button variant="outlined" component="label" fullWidth>
+                {paymentFile ? paymentFile.name : 'Upload Payment Screenshot'}
+                <input type="file" hidden accept="image/*" onChange={handleFileChange} />
+              </Button>
             </Box>
-
-            <Typography variant="body1" sx={{ mb: 2 }}>
-              After completing the payment, please upload a screenshot of the payment confirmation:
-            </Typography>
-            <Button variant="outlined" component="label" fullWidth>
-              {paymentFile ? paymentFile.name : 'Upload Payment Screenshot'}
-              <input type="file" hidden accept="image/*" onChange={handleFileChange} />
-            </Button>
           </Box>
         );
 
