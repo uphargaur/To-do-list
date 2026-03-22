@@ -47,6 +47,11 @@ const Book = () => {
   const currentService = services.find((s) => s.id === selectedService);
   const selectedPricingOption = currentService?.pricingOptions[selectedPricingIndex];
 
+  // Scroll to top when page first loads
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, []);
+
   // Auto-scroll to card top when step changes
   useEffect(() => {
     if (cardRef.current) {
@@ -189,11 +194,9 @@ const Book = () => {
                     onClick={() => {
                       setSelectedService(service.id);
                       setSelectedPricingIndex(0); // Reset to first pricing option
-                      // Auto-scroll to next button after selection
+                      // Auto-advance to next step after selection
                       setTimeout(() => {
-                        if (nextButtonRef.current) {
-                          nextButtonRef.current.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                        }
+                        setActiveStep(1);
                       }, 300);
                     }}
                   >
