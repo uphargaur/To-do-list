@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import {
   Box,
   Container,
@@ -40,8 +40,19 @@ const Book = () => {
   const [error, setError] = useState('');
   const [bookingId, setBookingId] = useState<string | null>(null);
 
+  // Refs for auto-scroll functionality
+  const cardRef = useRef<HTMLDivElement>(null);
+  const nextButtonRef = useRef<HTMLDivElement>(null);
+
   const currentService = services.find((s) => s.id === selectedService);
   const selectedPricingOption = currentService?.pricingOptions[selectedPricingIndex];
+
+  // Auto-scroll to card top when step changes
+  useEffect(() => {
+    if (cardRef.current) {
+      cardRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }, [activeStep]);
 
   const handleNext = async () => {
     setError('');
@@ -178,6 +189,12 @@ const Book = () => {
                     onClick={() => {
                       setSelectedService(service.id);
                       setSelectedPricingIndex(0); // Reset to first pricing option
+                      // Auto-scroll to next button after selection
+                      setTimeout(() => {
+                        if (nextButtonRef.current) {
+                          nextButtonRef.current.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                        }
+                      }, 300);
                     }}
                   >
                     <CardContent sx={{ p: { xs: 2, sm: 3 } }}>
@@ -210,7 +227,15 @@ const Book = () => {
                   <FormLabel component="legend">Available Packages</FormLabel>
                   <RadioGroup
                     value={selectedPricingIndex}
-                    onChange={(e) => setSelectedPricingIndex(Number(e.target.value))}
+                    onChange={(e) => {
+                      setSelectedPricingIndex(Number(e.target.value));
+                      // Auto-scroll to next button after selection
+                      setTimeout(() => {
+                        if (nextButtonRef.current) {
+                          nextButtonRef.current.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                        }
+                      }, 300);
+                    }}
                   >
                     {currentService.pricingOptions.map((option, index) => (
                       <FormControlLabel
@@ -329,7 +354,45 @@ const Book = () => {
             </Card>
 
             <Typography variant="h6" sx={{ mb: 2 }}>
-              Scan QR Code to Pay
+              Pay via UPI
+            </Typography>
+
+            {/* UPI Payment Button */}
+            <Box sx={{ mb: 3, textAlign: 'center' }}>
+              <Button
+                variant="contained"
+                size="large"
+                fullWidth
+                sx={{
+                  maxWidth: 400,
+                  background: `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.secondary.main} 100%)`,
+                  color: 'white',
+                  py: 2,
+                  fontSize: '1.1rem',
+                  fontWeight: 600,
+                  mb: 2,
+                  boxShadow: `0 8px 24px ${alpha(theme.palette.primary.main, 0.35)}`,
+                  '&:hover': {
+                    boxShadow: `0 12px 32px ${alpha(theme.palette.primary.main, 0.45)}`,
+                  },
+                }}
+                onClick={() => {
+                  const upiId = '9656666993@othdfc';
+                  const name = 'Shirnjani';
+                  const amount = selectedPricingOption?.price || 0;
+                  const upiLink = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(name)}&am=${amount}&cu=INR`;
+                  window.location.href = upiLink;
+                }}
+              >
+                Pay ₹{selectedPricingOption?.price.toLocaleString('en-IN')} via PhonePe/UPI
+              </Button>
+              <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+                UPI ID: 9656666993@othdfc
+              </Typography>
+            </Box>
+
+            <Typography variant="h6" sx={{ mb: 2, textAlign: 'center' }}>
+              OR Scan QR Code
             </Typography>
             <Box sx={{ display: 'flex', justifyContent: 'center', mb: 3 }}>
               <Box
@@ -430,7 +493,7 @@ const Book = () => {
           ))}
         </Stepper>
 
-        <Card sx={{ p: { xs: 2, sm: 3, md: 4 } }}>
+        <Card ref={cardRef} sx={{ p: { xs: 2, sm: 3, md: 4 } }}>
           {error && (
             <Alert severity="error" sx={{ mb: 3 }}>
               {error}
@@ -440,7 +503,7 @@ const Book = () => {
           {renderStepContent()}
 
           {activeStep < steps.length - 1 && (
-            <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 4 }}>
+            <Box ref={nextButtonRef} sx={{ display: 'flex', justifyContent: 'space-between', mt: 4 }}>
               <Button disabled={activeStep === 0} onClick={handleBack}>
                 Back
               </Button>

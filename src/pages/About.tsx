@@ -259,7 +259,7 @@ const About = () => {
           Experience & Impact
         </Typography>
         <Grid container spacing={4}>
-          <Grid item xs={12} md={4}>
+          <Grid item xs={12} sm={6} md={3}>
             <Card
               sx={{
                 textAlign: 'center',
@@ -275,7 +275,7 @@ const About = () => {
               <Typography variant="h6">Years of Practice</Typography>
             </Card>
           </Grid>
-          <Grid item xs={12} md={4}>
+          <Grid item xs={12} sm={6} md={3}>
             <Card
               sx={{
                 textAlign: 'center',
@@ -288,10 +288,10 @@ const About = () => {
               <Typography variant="h2" sx={{ fontWeight: 700, mb: 1 }}>
                 {aboutContent.experience.clientsServed}
               </Typography>
-              <Typography variant="h6">Clients Served</Typography>
+              <Typography variant="h6">Happy Clients</Typography>
             </Card>
           </Grid>
-          <Grid item xs={12} md={4}>
+          <Grid item xs={12} sm={6} md={3}>
             <Card
               sx={{
                 textAlign: 'center',
@@ -304,7 +304,23 @@ const About = () => {
               <Typography variant="h2" sx={{ fontWeight: 700, mb: 1 }}>
                 {aboutContent.experience.sessionsCompleted}
               </Typography>
-              <Typography variant="h6">Sessions Completed</Typography>
+              <Typography variant="h6">Orders Completed</Typography>
+            </Card>
+          </Grid>
+          <Grid item xs={12} sm={6} md={3}>
+            <Card
+              sx={{
+                textAlign: 'center',
+                p: 4,
+                background: `linear-gradient(135deg, ${theme.palette.secondary.main}, ${theme.palette.primary.main})`,
+                color: 'white',
+              }}
+            >
+              <EventIcon sx={{ fontSize: 64, mb: 2 }} />
+              <Typography variant="h2" sx={{ fontWeight: 700, mb: 1 }}>
+                {aboutContent.experience.totalMinutes}
+              </Typography>
+              <Typography variant="h6">Minutes of Guidance</Typography>
             </Card>
           </Grid>
         </Grid>

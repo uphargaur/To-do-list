@@ -186,7 +186,8 @@ export const aboutContent = {
   experience: {
     years: '5+',
     clientsServed: '500+',
-    sessionsCompleted: '1000+',
+    sessionsCompleted: '10k+',
+    totalMinutes: '50k+',
   },
 
   qualifications: [
