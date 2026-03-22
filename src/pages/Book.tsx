@@ -39,6 +39,7 @@ const Book = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [bookingId, setBookingId] = useState<string | null>(null);
+  const [showUpiAppSelector, setShowUpiAppSelector] = useState(false);
 
   // Refs for auto-scroll functionality
   const cardRef = useRef<HTMLDivElement>(null);
@@ -369,79 +370,119 @@ const Book = () => {
 
             {/* UPI Payment Button */}
             <Box sx={{ mb: 3, textAlign: 'center' }}>
-              <Button
-                variant="contained"
-                size="large"
-                fullWidth
-                sx={{
-                  maxWidth: 400,
-                  background: `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.secondary.main} 100%)`,
-                  color: 'white',
-                  py: 2,
-                  fontSize: '1.1rem',
-                  fontWeight: 600,
-                  mb: 2,
-                  boxShadow: `0 8px 24px ${alpha(theme.palette.primary.main, 0.35)}`,
-                  '&:hover': {
-                    boxShadow: `0 12px 32px ${alpha(theme.palette.primary.main, 0.45)}`,
-                  },
-                }}
-                onClick={(e) => {
-                  e.preventDefault();
-                  e.stopPropagation();
+              {/* Detect iOS */}
+              {/iPad|iPhone|iPod/.test(navigator.userAgent) && !(window as any).MSStream ? (
+                <>
+                  {!showUpiAppSelector ? (
+                    <Button
+                      variant="contained"
+                      size="large"
+                      fullWidth
+                      sx={{
+                        maxWidth: 400,
+                        background: `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.secondary.main} 100%)`,
+                        color: 'white',
+                        py: 2,
+                        fontSize: '1.1rem',
+                        fontWeight: 600,
+                        mb: 2,
+                        boxShadow: `0 8px 24px ${alpha(theme.palette.primary.main, 0.35)}`,
+                        '&:hover': {
+                          boxShadow: `0 12px 32px ${alpha(theme.palette.primary.main, 0.45)}`,
+                        },
+                      }}
+                      onClick={() => setShowUpiAppSelector(true)}
+                    >
+                      Pay ₹{selectedPricingOption?.price.toLocaleString('en-IN')} via UPI
+                    </Button>
+                  ) : (
+                    <Box sx={{ maxWidth: 400, mx: 'auto' }}>
+                      <Typography variant="h6" sx={{ mb: 2 }}>
+                        Choose Your UPI App
+                      </Typography>
+                      <Grid container spacing={2} sx={{ mb: 2 }}>
+                        {[
+                          { name: 'PhonePe', scheme: 'phonepe://pay', color: '#5f259f' },
+                          { name: 'Google Pay', scheme: 'tez://upi/pay', color: '#4285f4' },
+                          { name: 'Paytm', scheme: 'paytmmp://pay', color: '#00baf2' },
+                          { name: 'BHIM', scheme: 'bhim://pay', color: '#d32f2f' },
+                          { name: 'Amazon Pay', scheme: 'amazonpay://pay', color: '#ff9900' },
+                          { name: 'MobiKwik', scheme: 'mobikwik://upi', color: '#e91e63' },
+                        ].map((app) => (
+                          <Grid item xs={6} key={app.name}>
+                            <Button
+                              variant="outlined"
+                              fullWidth
+                              sx={{
+                                py: 1.5,
+                                borderColor: app.color,
+                                color: app.color,
+                                fontWeight: 600,
+                                '&:hover': {
+                                  borderColor: app.color,
+                                  backgroundColor: alpha(app.color, 0.1),
+                                },
+                              }}
+                              onClick={() => {
+                                const upiId = '9756666993@pthdfc';
+                                const name = 'Shirnjani';
+                                const amount = selectedPricingOption?.price || 0;
+                                const paymentUrl = `${app.scheme}?pa=${upiId}&pn=${encodeURIComponent(name)}&am=${amount}&cu=INR`;
 
-                  const upiId = '9756666993@pthdfc';
-                  const name = 'Shirnjani';
-                  const amount = selectedPricingOption?.price || 0;
+                                window.location.href = paymentUrl;
 
-                  // Detect iOS
-                  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !(window as any).MSStream;
-
-                  if (isIOS) {
-                    // For iOS, show alert with UPI ID and copy to clipboard
-                    navigator.clipboard.writeText(upiId).then(() => {
-                      alert(`UPI ID copied to clipboard!\n\nUPI ID: ${upiId}\nAmount: ₹${amount.toLocaleString('en-IN')}\n\nPlease open any UPI app (PhonePe, Google Pay, Paytm, BHIM, Amazon Pay, MobiKwik) and paste the UPI ID to make payment.`);
-                    }).catch(() => {
-                      alert(`Please pay via UPI:\n\nUPI ID: ${upiId}\nAmount: ₹${amount.toLocaleString('en-IN')}\n\nOpen any UPI app to make payment.`);
-                    });
-
-                    // Try to open multiple UPI apps (try all popular ones)
-                    const upiApps = [
-                      `phonepe://pay?pa=${upiId}&pn=${encodeURIComponent(name)}&am=${amount}&cu=INR`,
-                      `paytmmp://pay?pa=${upiId}&pn=${encodeURIComponent(name)}&am=${amount}&cu=INR`,
-                      `tez://upi/pay?pa=${upiId}&pn=${encodeURIComponent(name)}&am=${amount}&cu=INR`, // Google Pay
-                      `bhim://pay?pa=${upiId}&pn=${encodeURIComponent(name)}&am=${amount}&cu=INR`,
-                      `mobikwik://upi?pa=${upiId}&pn=${encodeURIComponent(name)}&am=${amount}&cu=INR`,
-                      `amazonpay://pay?pa=${upiId}&pn=${encodeURIComponent(name)}&am=${amount}&cu=INR`,
-                    ];
-
-                    // Try each app with a small delay
-                    upiApps.forEach((appUrl, index) => {
-                      try {
-                        setTimeout(() => {
-                          const iframe = document.createElement('iframe');
-                          iframe.style.display = 'none';
-                          iframe.src = appUrl;
-                          document.body.appendChild(iframe);
-                          setTimeout(() => {
-                            try {
-                              document.body.removeChild(iframe);
-                            } catch (e) {}
-                          }, 1000);
-                        }, index * 200);
-                      } catch (err) {
-                        console.log(`UPI app ${index} deep link failed:`, err);
-                      }
-                    });
-                  } else {
-                    // For Android, use standard UPI link
+                                // Copy UPI ID as fallback
+                                setTimeout(() => {
+                                  navigator.clipboard.writeText(upiId).then(() => {
+                                    alert(`If ${app.name} didn't open:\n\nUPI ID copied: ${upiId}\nAmount: ₹${amount.toLocaleString('en-IN')}\n\nPlease paste in ${app.name} manually.`);
+                                  });
+                                }, 2000);
+                              }}
+                            >
+                              {app.name}
+                            </Button>
+                          </Grid>
+                        ))}
+                      </Grid>
+                      <Button
+                        size="small"
+                        onClick={() => setShowUpiAppSelector(false)}
+                        sx={{ color: 'text.secondary' }}
+                      >
+                        ← Back
+                      </Button>
+                    </Box>
+                  )}
+                </>
+              ) : (
+                <Button
+                  variant="contained"
+                  size="large"
+                  fullWidth
+                  sx={{
+                    maxWidth: 400,
+                    background: `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.secondary.main} 100%)`,
+                    color: 'white',
+                    py: 2,
+                    fontSize: '1.1rem',
+                    fontWeight: 600,
+                    mb: 2,
+                    boxShadow: `0 8px 24px ${alpha(theme.palette.primary.main, 0.35)}`,
+                    '&:hover': {
+                      boxShadow: `0 12px 32px ${alpha(theme.palette.primary.main, 0.45)}`,
+                    },
+                  }}
+                  onClick={() => {
+                    const upiId = '9756666993@pthdfc';
+                    const name = 'Shirnjani';
+                    const amount = selectedPricingOption?.price || 0;
                     const upiLink = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(name)}&am=${amount}&cu=INR`;
                     window.location.href = upiLink;
-                  }
-                }}
-              >
-                Pay ₹{selectedPricingOption?.price.toLocaleString('en-IN')} via PhonePe/UPI
-              </Button>
+                  }}
+                >
+                  Pay ₹{selectedPricingOption?.price.toLocaleString('en-IN')} via UPI
+                </Button>
+              )}
               <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
                 UPI ID: 9756666993@pthdfc
               </Typography>
