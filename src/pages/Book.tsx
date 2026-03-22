@@ -287,8 +287,15 @@ const Book = () => {
 
       case 2:
         return (
-          <Box>
-            <Typography variant="h5" sx={{ mb: 3, fontWeight: 600 }}>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              minHeight: { xs: '50vh', sm: '60vh' }
+            }}
+          >
+            <Typography variant="h5" sx={{ mb: 3, fontWeight: 600, textAlign: 'center' }}>
               Your Contact Information
             </Typography>
             <Grid container spacing={3}>
