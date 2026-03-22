@@ -380,7 +380,7 @@ const Book = () => {
                   },
                 }}
                 onClick={() => {
-                  const upiId = '9656666993@othdfc';
+                  const upiId = '9656666993@ptsbi';
                   const name = 'Shirnjani';
                   const amount = selectedPricingOption?.price || 0;
                   const upiLink = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(name)}&am=${amount}&cu=INR`;
@@ -390,7 +390,7 @@ const Book = () => {
                 Pay ₹{selectedPricingOption?.price.toLocaleString('en-IN')} via PhonePe/UPI
               </Button>
               <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
-                UPI ID: 9656666993@othdfc
+                UPI ID: 9656666993@ptsbi
               </Typography>
             </Box>
 
